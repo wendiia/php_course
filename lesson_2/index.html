@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Lesson 2 </title>
+    <style>
+        #posts {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: center;
+        }
+
+        p {
+            color: #868686;
+        }
+
+        em {
+            font-weight: 700;
+            color: #6f9b9b;
+        }
+
+
+        body {
+            font-family: Arial,serif;
+            background: #e8e0de;
+        }
+
+        article {
+            max-width: 500px;
+            padding: 20px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 25px;
+            margin: 20px;
+
+        }
+
+        .post__info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .post__title {
+            font-size: 35px;
+            margin: 10px 0;
+
+        }
+
+        a {
+            text-decoration: none;
+            color: #5c7575;
+        }
+
+
+        .creator {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .creator__avatar {
+            background: bisque;
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+        }
+
+        article > img {
+            width: inherit;
+        }
+    </style>
+</head>
+<body>
+<p style="font-size: 50px;text-align: center; font-weight: bold"> Новостная лента Dedulya </p>
+
+<section id="posts">
+    <article class="post">
+        <div class="post__info">
+            <div class="creator">
+                <div class="creator__avatar"></div>
+                <p> Ovceeb </p>
+            </div>
+
+            <em> Дата поста: 12.06.2023</em>
+        </div>
+        <h1 class="post__title"><a href=""> Новые исследования ученых </a></h1>
+        <div style="display: flex; align-items: center">
+            <strong style="margin: 0 5px 0 0">Рубрика: </strong>
+            <h4 style="margin: 0"><a href="">животные</a></h4>
+        </div>
+
+        <p>
+            Шок-новость! Дагестанские ученые разработки очко барану.
+        </p>
+        <img src="https://klike.net/uploads/posts/2023-01/1674709876_3-139.jpg" alt="post_1_img">
+    </article>
+
+    <article class="post">
+        <div class="post__info">
+            <div class="creator">
+                <div class="creator__avatar"></div>
+                <p> AHAJI </p>
+            </div>
+
+            <em> Дата поста: 12.06.2023</em>
+        </div>
+        <h1 class="post__title"><a href=""> Просто немного котиков </a></h1>
+        <div style="display: flex; align-items: center">
+            <strong style="margin: 0 5px 0 0">Рубрика: </strong>
+            <h4 style="margin: 0"><a href="">животные</a></h4>
+        </div>
+
+        <p>
+            Тут просто котики
+        </p>
+        <img src="https://www.blogodisea.com/wp-content/uploads/2020/03/gatitos-llorando.png" alt="post_1_img">
+    </article>
+
+    <article class="post">
+        <div class="post__info">
+            <div class="creator">
+                <div class="creator__avatar"></div>
+                <p> Starpony </p>
+            </div>
+
+            <em> Дата поста: 12.06.2023</em>
+        </div>
+        <h1 class="post__title"><a href=""> Прелести удаленки </a></h1>
+        <div style="display: flex; align-items: center">
+            <strong style="margin: 0 5px 0 0">Рубрика: </strong>
+            <h4 style="margin: 0"><a href="">животные</a></h4>
+        </div>
+
+        <p>
+            удаленка дар или проклятие?
+        </p>
+        <img src="https://avatars.mds.yandex.net/i?id=016d569251c8b8a476a732dff26de42f_l-8257715-images-thumbs&n=13" alt="post_1_img">
+    </article>
+</section>
+
+
+</body>
+</html>
