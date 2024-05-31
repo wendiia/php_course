@@ -1,0 +1,96 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container ul {
+    display: flex;
+}
+
+.container li {
+    margin-right: 40px;
+
+}
+
+#song {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.song__text {
+    font-size: 20px;
+    color: #6e5f5c;
+}
+
+.title {
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #868686;
+}
+
+p {
+    color: #868686;
+}
+
+em {
+    font-weight: 700;
+    color: #6f9b9b;
+}
+
+
+body {
+    font-family: Arial,serif;
+    background: #e8e0de;
+}
+
+article {
+    max-width: 600px;
+    padding: 20px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 25px;
+    margin: 20px;
+
+}
+
+.song__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.song__title {
+    font-size: 35px;
+    margin: 10px 0;
+
+}
+
+a {
+    text-decoration: none;
+    color: #5c7575;
+}
+
+article > img {
+    width: inherit;
+}
+
+.chord__title {
+    font-size: 35px;
+    margin: 10px 0;
+
+}
+
+.chord__text {
+    font-size: 20px;
+    color: #6e5f5c;
+}
+
+.chord img {
+    width: 300px;
+}
