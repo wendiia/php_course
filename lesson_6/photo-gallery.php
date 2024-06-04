@@ -1,3 +1,19 @@
+<?php
+function myscandir($path)
+{
+    $files = [];
+    foreach ($path as $key => $item) {
+        if ($item != '.' and $item != '..') {
+            $files[$key] = $item;
+        }
+    }
+    return $files;
+}
+
+$path = scandir(__DIR__ . '/assets');
+$images = myscandir($path);
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,23 +47,33 @@
 <div class="container">
     <div class="row g-3">
         <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <a href="/image.php?file=guitar1.jpg"><img src="/assets/img/guitar1.jpg" class="img-fluid rounded object-fit-cover" alt="guitar_1"></a>
+            <?php
+            foreach ($images as $image) { ?>
+                <a href="/image.php?file=guitar1.jpg">
+                    <img src="/assets/img/guitar1.jpg" class="img-fluid rounded object-fit-cover" alt="guitar_1">
+                </a>
+            <?php } ?>
         </div>
-        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <a href="/image.php?file=guitar2.jpg"><img src="/assets/img/guitar2.jpg" class="img-fluid rounded object-fit-" alt="guitar_1"></a>
-        </div>
-        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <a href="/image.php?file=guitar3.jpg"><img src="/assets/img/guitar3.jpg" class="img-fluid rounded " alt="guitar_1"></a>
-        </div>
-        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <a href="/image.php?file=guitar4.jpg"><img src="/assets/img/guitar4.png" class="img-fluid rounded " alt="guitar_1"></a>
-        </div>
-        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <a href="/image.php?file=guitar5.jpg"><img src="/assets/img/guitar5.jpg" class="img-fluid rounded " alt="guitar_1"></a>
-        </div>
-        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <a href="/image.php?file=guitar6.jpg"><img src="/assets/img/guitar6.jpg" class="img-fluid rounded " alt="guitar_1"></a>
-        </div>
+        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
+        <!--            <a href="/image.php?file=guitar2.jpg"><img src="/assets/img/guitar2.jpg"-->
+        <!--                                                       class="img-fluid rounded object-fit-" alt="guitar_1"></a>-->
+        <!--        </div>-->
+        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
+        <!--            <a href="/image.php?file=guitar3.jpg"><img src="/assets/img/guitar3.jpg" class="img-fluid rounded "-->
+        <!--                                                       alt="guitar_1"></a>-->
+        <!--        </div>-->
+        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
+        <!--            <a href="/image.php?file=guitar4.jpg"><img src="/assets/img/guitar4.png" class="img-fluid rounded "-->
+        <!--                                                       alt="guitar_1"></a>-->
+        <!--        </div>-->
+        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
+        <!--            <a href="/image.php?file=guitar5.jpg"><img src="/assets/img/guitar5.jpg" class="img-fluid rounded "-->
+        <!--                                                       alt="guitar_1"></a>-->
+        <!--        </div>-->
+        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
+        <!--            <a href="/image.php?file=guitar6.jpg"><img src="/assets/img/guitar6.jpg" class="img-fluid rounded "-->
+        <!--                                                       alt="guitar_1"></a>-->
+        <!--        </div>-->
     </div>
 
 </div>

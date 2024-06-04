@@ -35,33 +35,46 @@
             <i class="fa-solid fa-guitar fa-sm" style="color: #6db3df;"></i>
         </h1>
         <pre class="text-center "><?php
-            function func1($a, $b)
-            {
-                echo $a + $b . "\n";
-                return $a + $b;
+//            function func1($a, $b)
+//            {
+//                echo $a + $b . "\n";
+//                return $a + $b;
+//            }
+//
+//            $c = func1(1, 2);
+//            echo $c . "\n";
+//
+//
+//            $a = ['a' => 1, 'b' => 2, 'c' => 3];
+//            var_dump($a['a']);
+//
+//            foreach ($a as $key => $val) {
+//                echo $key . ' => ' . $val . "\n";
+//            }
+//            $test = 'test1';
+//
+//            if (' ') {
+//                echo 'true';
+//            } else {
+//                echo 'false';
+//            }
+//
+//            echo "\n--------\n";
+//            $list = scandir(__DIR__ . '/assets');
+//            var_dump($list);
+
+            function myscandir ($path) {
+                $files = [];
+                foreach ($path as $key => $item) {
+                    if ($item != '.' and $item != '..') {
+                        $files[$key] = $item;
+                    }
+                }
+                return $files;
             }
 
-            $c = func1(1, 2);
-            echo $c . "\n";
-
-
-            $a = ['a' => 1, 'b' => 2, 'c' => 3];
-            var_dump($a['a']);
-
-            foreach ($a as $key => $val) {
-                echo $key . ' => ' . $val . "\n";
-            }
-            $test = 'test1';
-
-            if (' ') {
-                echo 'true';
-            } else {
-                echo 'false';
-            }
-
-            echo "\n--------\n";
-            $list = scandir(__DIR__ . '/assets');
-            var_dump($list);
+            $file_path = scandir(__DIR__ . '/assets');
+            var_dump(myscandir($file_path));
 
             ?>
         <pre>
