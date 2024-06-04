@@ -41,7 +41,7 @@
     </div>
     <div class="row g-3">
         <div class="col-12 ">
-            <img src="/assets/img/<?php echo $_GET['file']; ?>" class="img-fluid rounded object-fit-cover" alt="<?php echo $_GET['file']; ?>">
+            <img src="/assets/img/photogallery/<?php echo $_GET['file']; ?>" class="img-fluid rounded object-fit-cover" alt="<?php echo $_GET['file']; ?>">
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@ function myscandir($path)
     return $files;
 }
 
-$path = scandir(__DIR__ . '/assets');
+$path = scandir(__DIR__ . '\assets\img\photogallery');
 $images = myscandir($path);
 ?>
 
@@ -46,36 +46,16 @@ $images = myscandir($path);
 
 <div class="container">
     <div class="row g-3">
-        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-            <?php
-            foreach ($images as $image) { ?>
-                <a href="/image.php?file=guitar1.jpg">
-                    <img src="/assets/img/guitar1.jpg" class="img-fluid rounded object-fit-cover" alt="guitar_1">
+        <?php
+        foreach ($images as $image) { ?>
+            <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
+                <a href="/image.php?file=<?php echo $image ?>">
+                    <img src="/assets/img/photogallery/<?php echo $image ?>" class="img-fluid rounded object-fit-cover"
+                         alt="guitar">
                 </a>
-            <?php } ?>
-        </div>
-        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
-        <!--            <a href="/image.php?file=guitar2.jpg"><img src="/assets/img/guitar2.jpg"-->
-        <!--                                                       class="img-fluid rounded object-fit-" alt="guitar_1"></a>-->
-        <!--        </div>-->
-        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
-        <!--            <a href="/image.php?file=guitar3.jpg"><img src="/assets/img/guitar3.jpg" class="img-fluid rounded "-->
-        <!--                                                       alt="guitar_1"></a>-->
-        <!--        </div>-->
-        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
-        <!--            <a href="/image.php?file=guitar4.jpg"><img src="/assets/img/guitar4.png" class="img-fluid rounded "-->
-        <!--                                                       alt="guitar_1"></a>-->
-        <!--        </div>-->
-        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
-        <!--            <a href="/image.php?file=guitar5.jpg"><img src="/assets/img/guitar5.jpg" class="img-fluid rounded "-->
-        <!--                                                       alt="guitar_1"></a>-->
-        <!--        </div>-->
-        <!--        <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">-->
-        <!--            <a href="/image.php?file=guitar6.jpg"><img src="/assets/img/guitar6.jpg" class="img-fluid rounded "-->
-        <!--                                                       alt="guitar_1"></a>-->
-        <!--        </div>-->
+            </div>
+        <?php } ?>
     </div>
-
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
