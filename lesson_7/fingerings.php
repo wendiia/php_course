@@ -1,19 +1,3 @@
-<?php
-function myscandir($path)
-{
-    $files = [];
-    foreach ($path as $key => $item) {
-        if ($item != '.' and $item != '..') {
-            $files[$key] = $item;
-        }
-    }
-    return $files;
-}
-
-$path = scandir(__DIR__ . '\assets\img\photogallery');
-$images = myscandir($path);
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,7 +11,7 @@ $images = myscandir($path);
 </head>
 <body>
 
-<nav class="container-fluid mb-4">
+<nav class="container-fluid">
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Главная</a>
@@ -41,21 +25,28 @@ $images = myscandir($path);
         <li class="nav-item">
             <a class="nav-link" href="/photo-gallery.php">Фотогаллерея</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/calculator.php">Калькулятор</a>
+        </li>
     </ul>
 </nav>
 
-<div class="container">
-    <div class="row g-3">
-        <?php
-        foreach ($images as $image) { ?>
-            <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-                <a href="/image.php?file=<?php echo $image; ?>">
-                    <img src="/assets/img/photogallery/<?php echo $image; ?>" class="img-fluid rounded object-fit-cover"
-                         alt="guitar">
-                </a>
-            </div>
-        <?php } ?>
-    </div>
+<div class="container align-center">
+    <h1 class="title"> Аппликатуры </h1>
+    <section class="d-flex flex-column align-items-center" id="chords">
+        <article class="chord">
+            <h1 class="chord__title"><a href=""> Am </a></h1>
+            <img src="/assets/img/am.jpg" class="img-thumbnail" alt="am">
+        </article>
+        <article class="chord">
+            <h1 class="chord__title"><a href=""> E </a></h1>
+            <img src="/assets/img/e.jpg" class="img-thumbnail" alt="e">
+        </article>
+        <article class="chord">
+            <h1 class="chord__title"><a href=""> Dm </a></h1>
+            <img src="/assets/img/dm.jpg" class="img-thumbnail" alt="dm">
+        </article>
+    </section>
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

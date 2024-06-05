@@ -1,19 +1,3 @@
-<?php
-function myscandir($path)
-{
-    $files = [];
-    foreach ($path as $key => $item) {
-        if ($item != '.' and $item != '..') {
-            $files[$key] = $item;
-        }
-    }
-    return $files;
-}
-
-$path = scandir(__DIR__ . '\assets\img\photogallery');
-$images = myscandir($path);
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,20 +25,27 @@ $images = myscandir($path);
         <li class="nav-item">
             <a class="nav-link" href="/photo-gallery.php">Фотогаллерея</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/calculator.php">Калькулятор</a>
+        </li>
     </ul>
 </nav>
 
 <div class="container">
+    <div class="row">
+        <a href="/photo-gallery.php" class="btn btn-primary"> Назад </a>
+        <div class="col">
+            <h3 class="text-center display-5">
+                <?php
+                echo explode('.', $_GET['file'])[0];
+                ?>
+            </h3>
+        </div>
+    </div>
     <div class="row g-3">
-        <?php
-        foreach ($images as $image) { ?>
-            <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-                <a href="/image.php?file=<?php echo $image; ?>">
-                    <img src="/assets/img/photogallery/<?php echo $image; ?>" class="img-fluid rounded object-fit-cover"
-                         alt="guitar">
-                </a>
-            </div>
-        <?php } ?>
+        <div class="col-12 ">
+            <img src="/assets/img/photogallery/<?php echo $_GET['file']; ?>" class="img-fluid rounded object-fit-cover" alt="<?php echo $_GET['file']; ?>">
+        </div>
     </div>
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>

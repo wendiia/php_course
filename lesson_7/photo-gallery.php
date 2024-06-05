@@ -41,10 +41,24 @@ $images = myscandir($path);
         <li class="nav-item">
             <a class="nav-link" href="/photo-gallery.php">Фотогаллерея</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/calculator.php">Калькулятор</a>
+        </li>
     </ul>
 </nav>
 
 <div class="container">
+
+    <div class="row justify-content-center mb-4">
+        <h3 class="text-center display-5 mb-4"> Фотогалерея </h3>
+        <div class="col-6">
+            <form action="/upload.php" method="post" enctype="multipart/form-data">
+                <input class="form-control"  type="file" name="img" accept="image/png, image/jpeg">
+                <input class="btn btn-primary w-100" type="submit">
+            </form>
+        </div>
+    </div>
+
     <div class="row g-3">
         <?php
         foreach ($images as $image) { ?>

@@ -1,19 +1,6 @@
 <?php
-function myscandir($path)
-{
-    $files = [];
-    foreach ($path as $key => $item) {
-        if ($item != '.' and $item != '..') {
-            $files[$key] = $item;
-        }
-    }
-    return $files;
-}
-
-$path = scandir(__DIR__ . '\assets\img\photogallery');
-$images = myscandir($path);
+    $comment = file(__DIR__.'/assets/comments/'.$_GET['file']);
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,20 +28,35 @@ $images = myscandir($path);
         <li class="nav-item">
             <a class="nav-link" href="/photo-gallery.php">Фотогаллерея</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/calculator.php">Калькулятор</a>
+        </li>
     </ul>
 </nav>
 
 <div class="container">
-    <div class="row g-3">
-        <?php
-        foreach ($images as $image) { ?>
-            <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-                <a href="/image.php?file=<?php echo $image; ?>">
-                    <img src="/assets/img/photogallery/<?php echo $image; ?>" class="img-fluid rounded object-fit-cover"
-                         alt="guitar">
-                </a>
+    <div class="row">
+        <a href="/index.php" class="btn btn-primary"> Назад </a>
+        <div class="col">
+            <h5 class="text-center display-6">
+                Комментарий:
+                <?php
+                echo $_GET['file'];
+                ?>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 comment">
+            <div class="creator mb-2">
+                <div class="creator__avatar"></div>
+                <p class="m-0 me-5"> <?php echo $comment[2]; ?> </p>
+                <p class="m-0"> Дата комментария: <?php echo $comment[1]; ?> </p>
             </div>
-        <?php } ?>
+            <p class="comment__text">
+                <a href="/comment.php?file=<?php echo $comment[0]; ?>"> <?php echo $comment[3] ?> </a>
+            </p>
+        </div>
     </div>
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>

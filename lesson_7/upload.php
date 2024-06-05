@@ -1,17 +1,18 @@
 <?php
-function myscandir($path)
-{
-    $files = [];
-    foreach ($path as $key => $item) {
-        if ($item != '.' and $item != '..') {
-            $files[$key] = $item;
+$result = 'Файл был загружен!';
+if (0 != $_FILES['img']['error']) {
+    $result = 'Ошибка при загрузке файла!';
+} else {
+    if (!empty($_FILES['img']['name'])) {
+        if ($_FILES['img']['size'] < 1000000) {
+            move_uploaded_file($_FILES['img']['tmp_name'], __DIR__ . '/assets/img/photogallery/' . $_FILES['img']['name']);
+        } else {
+            $result = 'Вес загружаемого файла слишком большой!';
         }
+    } else {
+        $result = 'Файл не был выбран!';
     }
-    return $files;
 }
-
-$path = scandir(__DIR__ . '\assets\img\photogallery');
-$images = myscandir($path);
 ?>
 
 <!doctype html>
@@ -41,20 +42,16 @@ $images = myscandir($path);
         <li class="nav-item">
             <a class="nav-link" href="/photo-gallery.php">Фотогаллерея</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/calculator.php">Калькулятор</a>
+        </li>
     </ul>
 </nav>
 
 <div class="container">
-    <div class="row g-3">
-        <?php
-        foreach ($images as $image) { ?>
-            <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
-                <a href="/image.php?file=<?php echo $image; ?>">
-                    <img src="/assets/img/photogallery/<?php echo $image; ?>" class="img-fluid rounded object-fit-cover"
-                         alt="guitar">
-                </a>
-            </div>
-        <?php } ?>
+    <div class="row justify-content-center mb-4">
+        <h3 class="text-center display-5 mb-4"> <?php echo $result; ?> </h3>
+        <a href="/photo-gallery.php" class="btn btn-primary"> Назад </a>
     </div>
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>
