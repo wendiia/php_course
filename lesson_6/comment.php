@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Lesson 5 </title>
+    <title> Lesson 6 </title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -32,12 +32,12 @@
     <div class="row">
         <a href="/index.php" class="btn btn-primary"> Назад </a>
         <div class="col">
-            <h3 class="text-center display-5">
+            <h5 class="text-center display-6">
                 Комментарий:
                 <?php
-                echo explode('.', $_GET['file'])[0];
+                echo $_GET['file'];
                 ?>
-            </h3>
+            </h5>
         </div>
     </div>
     <div class="row">

@@ -1,3 +1,32 @@
+<?php
+function getAllComments($path) {
+    $comments = [];
+    $comment_names = myscandir(scandir($path));
+
+    foreach ($comment_names as $comment_name) {
+        $comments_date = explode('_', $comment_name)[0];
+        $comments[$comments_date] = file_get_contents(__DIR__ . '/assets/comments/' . $comment_name);
+    }
+
+    return $comments;
+}
+function myscandir($path)
+{
+    $files = [];
+    $n = 0;
+    foreach ($path as $item) {
+        if ($item != '.' and $item != '..') {
+            $files[$n++] = $item;
+        }
+    }
+    return $files;
+}
+
+$path = scandir(__DIR__ . '\assets\comments');
+$comment_names = myscandir($path);
+$comments = getAllComments(__DIR__ . '\assets\comments');
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +34,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Lesson 5 </title>
+    <title> Lesson 6 </title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -50,41 +79,22 @@
     <section class="comments mb-4">
         <h3 class="text-center display-5 mb-4">Комментарии</h3>
 
+        <?php
+        $n = 0;
+        foreach ($comments as $time => $comment) { ?>
         <div class="row">
             <div class="col-12 comment">
                 <div class="creator mb-2">
                     <div class="creator__avatar"></div>
-                    <p class="m-0"> Ovceeb </p>
+                    <p class="m-0 me-5"> Noname </p>
+                    <p class="m-0"> Время оставления: <?php echo $time ?> </p>
                 </div>
                 <p class="comment__text">
-                    <a href="/comment.php?file=comment1.txt">Так себе песни и аккорды подобраны неверно....</a>
+                    <a href="/comment.php?file=<?php echo $comment_names[$n]; $n++; ?>"> <?php echo $comment ?> </a>
                 </p>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 comment">
-                <div class="creator mb-2">
-                    <div class="creator__avatar"></div>
-                    <p class="m-0"> Starpony </p>
-                </div>
-                <p class="comment__text">
-                    <a href="/comment.php?file=comment2.txt">Хороший сайт, экономит время на побор аккордов!</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 comment">
-                <div class="creator mb-2">
-                    <div class="creator__avatar"></div>
-                    <p class="m-0"> AHAJI </p>
-                </div>
-                <p class="comment__text">
-                    <a href="/comment.php?file=comment3.txt"> Продам гараж 8-800-555-35-35!!! </a>
-                </p>
-            </div>
-        </div>
+        <?php  }  ?>
 
         <div class="row justify-content-center">
             <div class="col-auto">
@@ -101,7 +111,8 @@
             <input type="text" class="form-control" id="exampleInputName">
         </div>
         <div class="form-floating mb-4">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                      style="height: 100px"></textarea>
             <label for="floatingTextarea2">Напишите что-нибудь...</label>
         </div>
 
