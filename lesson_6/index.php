@@ -1,7 +1,7 @@
 <?php
 function getAllComments($path) {
     $comments = [];
-    $comment_names = myscandir(scandir($path));
+    $comment_names = myscandir($path);
 
     foreach ($comment_names as $comment_name) {
         $comments_date = explode('_', $comment_name)[0];
@@ -12,20 +12,19 @@ function getAllComments($path) {
 }
 function myscandir($path)
 {
+    $file_names = scandir($path);
     $files = [];
     $n = 0;
-    foreach ($path as $item) {
-        if ($item != '.' and $item != '..') {
-            $files[$n++] = $item;
+    foreach ($file_names as $file_name) {
+        if ($file_name != '.' and $file_name != '..') {
+            $files[$n++] = $file_name;
         }
     }
     return $files;
 }
 
-$path = scandir(__DIR__ . '\assets\comments');
-$comment_names = myscandir($path);
+$comment_names = myscandir(__DIR__ . '\assets\comments');
 $comments = getAllComments(__DIR__ . '\assets\comments');
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -90,7 +89,7 @@ $comments = getAllComments(__DIR__ . '\assets\comments');
                     <p class="m-0"> Время оставления: <?php echo $time ?> </p>
                 </div>
                 <p class="comment__text">
-                    <a href="/comment.php?file=<?php echo $comment_names[$n]; $n++; ?>"> <?php echo $comment ?> </a>
+                    <a href="/comment.php?file=<?php echo $comment_names[$n++] ?>"> <?php echo $comment ?> </a>
                 </p>
             </div>
         </div>
