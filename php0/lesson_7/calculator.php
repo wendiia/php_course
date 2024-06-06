@@ -23,6 +23,33 @@ if (!empty($_POST['operation']) && isset($_POST['first_num']) && isset($_POST['s
 else {
     $result = 'Вы не заполнили все поля!';
 }
+
+function getAllComments($path) {
+    $comments = [];
+    $comment_names = myscandir($path);
+
+    foreach ($comment_names as $comment_name) {
+        $comments_date = explode('_', $comment_name)[0];
+        $comments[$comments_date] = file_get_contents(__DIR__ . '/assets/comments/' . $comment_name);
+    }
+
+    return $comments;
+}
+function myscandir($path)
+{
+    $file_names = scandir($path);
+    $files = [];
+    $n = 0;
+    foreach ($file_names as $file_name) {
+        if ($file_name != '.' and $file_name != '..') {
+            $files[$n++] = $file_name;
+        }
+    }
+    return $files;
+}
+
+$comment_names = myscandir(__DIR__ . '\assets\comments');
+$comments = getAllComments(__DIR__ . '\assets\comments');
 ?>
 <!doctype html>
 <html lang="en">
@@ -59,8 +86,24 @@ else {
 <div class="container align-center">
     <section class="comments mb-4">
         <h3 class="text-center display-5 mb-4"> Калькулятор </h3>
+
+        <form action="/calculator.php" method="post" class="d-flex flex-column mb-5">
+            <label  for="inputFirstNum"> Первое число: </label>
+            <input class="mb-3" id="inputFirstNum" type="number" name="first_num">
+            <label for="selectOperation"> Выбор операции: </label>
+            <select class="mb-3" name="operation" id="selectOperation">
+                <option value="">-- Выберите операцию --</option>
+                <option value="plus">+</option>
+                <option value="minus">-</option>
+                <option value="division">/</option>
+                <option value="multiplication">*</option>
+            </select>
+
+            <label for="inputSecondNum"> Второе число: </label>
+            <input class="mb-3" id="inputSecondNum" type="number" name="second_num">
+            <input class="btn btn-primary" type="submit">
+        </form>
         <p class="display-6"> Результат вычислений: <?php echo $result; ?> </p>
-        <a href="/calculator.php" class="btn btn-primary"> Назад </a>
     </section>
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>

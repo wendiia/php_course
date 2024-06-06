@@ -1,6 +1,3 @@
-<?php
-    $comment = file(__DIR__.'/assets/comments/'.$_GET['file']);
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,26 +33,11 @@
 
 <div class="container">
     <div class="row">
-        <a href="/index.php" class="btn btn-primary"> Назад </a>
-        <div class="col">
-            <h5 class="text-center display-6">
-                Комментарий:
-                <?php
-                echo $_GET['file'];
-                ?>
-            </h5>
-        </div>
+        <a href="/photo-gallery.php" class="btn btn-primary"> Назад </a>
     </div>
-    <div class="row">
-        <div class="col-12 comment">
-            <div class="creator mb-2">
-                <div class="creator__avatar"></div>
-                <p class="m-0 me-5"> <?php echo $comment[2]; ?> </p>
-                <p class="m-0"> Дата комментария: <?php echo $comment[1]; ?> </p>
-            </div>
-            <p class="comment__text">
-                <a href="/comment.php?file=<?php echo $comment[0]; ?>"> <?php echo $comment[3] ?> </a>
-            </p>
+    <div class="row g-3">
+        <div class="col-12 ">
+            <img src="/assets/img/photogallery/<?php echo $_GET['file']; ?>" class="img-fluid rounded object-fit-cover" alt="<?php echo $_GET['file']; ?>">
         </div>
     </div>
 </div>

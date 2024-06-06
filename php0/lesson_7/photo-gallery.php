@@ -1,15 +1,17 @@
 <?php
-date_default_timezone_set('Europe/Moscow');
-$result = 'Комментарий добавлен!';
-if (!empty($_POST['name'] && !empty($_POST['content']))) {
-    $comment_name = date("Y.m.d_h.i.s") . '_comment.txt';
-    $data = ['file_name' => $comment_name, 'time' => date("Y.m.d h:i")] + $_POST;
-    $data = implode("\n", $data);
-    file_put_contents(__DIR__ . '/assets/comments/' . $comment_name, $data);
+function myscandir($path)
+{
+    $file_names = scandir($path);
+    $files = [];
+    foreach ($file_names as $file_name) {
+        if ($file_name != '.' and $file_name != '..') {
+            $files[] = $file_name;
+        }
+    }
+    return $files;
 }
-else {
-    $result = 'Заполните все поля!';
-}
+
+$images = myscandir(__DIR__ . '\assets\img\photogallery');
 ?>
 
 <!doctype html>
@@ -46,9 +48,27 @@ else {
 </nav>
 
 <div class="container">
+
     <div class="row justify-content-center mb-4">
-        <h3 class="text-center display-5 mb-4"> <?php echo $result; ?> </h3>
-        <a href="/index.php" class="btn btn-primary"> Назад </a>
+        <h3 class="text-center display-5 mb-4"> Фотогалерея </h3>
+        <div class="col-6">
+            <form action="/upload-image.php" method="post" enctype="multipart/form-data">
+                <input class="form-control"  type="file" name="img" accept="image/png, image/jpeg">
+                <input class="btn btn-primary w-100" type="submit">
+            </form>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <?php
+        foreach ($images as $image) { ?>
+            <div class="col-md-4 col-xs-12 col-sm-6 img-wrapper">
+                <a href="/image.php?file=<?php echo $image; ?>">
+                    <img src="/assets/img/photogallery/<?php echo $image; ?>" class="img-fluid rounded object-fit-cover"
+                         alt="guitar">
+                </a>
+            </div>
+        <?php } ?>
     </div>
 </div>
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>

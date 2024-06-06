@@ -4,18 +4,19 @@ function getAllComments($path) {
     $comment_names = myscandir($path);
 
     foreach ($comment_names as $comment_name) {
-        $comments[$comment_name] = file($path . "/" . $comment_name, FILE_IGNORE_NEW_LINES);
+        $comments_date = explode('_', $comment_name)[0];
+        $comments[$comments_date] = file_get_contents(__DIR__ . '/assets/comments/' . $comment_name);
     }
+
     return $comments;
 }
 function myscandir($path)
 {
     $file_names = scandir($path);
     $files = [];
-    $n = 0;
     foreach ($file_names as $file_name) {
         if ($file_name != '.' and $file_name != '..') {
-            $files[$n++] = $file_name;
+            $files[] = $file_name;
         }
     }
     return $files;
@@ -50,9 +51,6 @@ $comments = getAllComments(__DIR__ . '\assets\comments');
         <li class="nav-item">
             <a class="nav-link" href="/photo-gallery.php">Фотогаллерея</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/calculator.php">Калькулятор</a>
-        </li>
     </ul>
 </nav>
 
@@ -75,35 +73,43 @@ $comments = getAllComments(__DIR__ . '\assets\comments');
             <img src="/assets/img/main_img.jpeg" class="img-fluid" alt="guitar">
         </div>
     </div>
-    
+
     <section class="comments mb-4">
         <h3 class="text-center display-5 mb-4">Комментарии</h3>
 
         <?php
-        foreach ($comments as $comment) { ?>
+        $i = 0;
+        foreach ($comments as $time => $comment) { ?>
         <div class="row">
             <div class="col-12 comment">
                 <div class="creator mb-2">
                     <div class="creator__avatar"></div>
-                    <p class="m-0 me-5"> <?php echo $comment[2]; ?> </p>
-                    <p class="m-0"> Дата комментария: <?php echo $comment[1]; ?> </p>
+                    <p class="m-0 me-5"> Noname </p>
+                    <p class="m-0"> Время оставления: <?php echo $time; ?> </p>
                 </div>
                 <p class="comment__text">
-                    <a href="/comment.php?file=<?php echo $comment[0]; ?>"> <?php echo $comment[3] ?> </a>
+                    <a href="/comment.php?file=<?php echo $comment_names[$i++]; ?>"> <?php echo $comment ?> </a>
                 </p>
             </div>
         </div>
         <?php  }  ?>
+
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary"> Показать все</button>
+            </div>
+        </div>
+
     </section>
 
     <h3 class="text-center display-6 mb-4"> Оставьте свой комментарий </h3>
-    <form action="/upload-comment.php" method="post">
+    <form>
         <div class="mb-3">
             <label for="exampleInputName" class="form-label"> Ваше имя: </label>
-            <input type="text" name="name" class="form-control" id="exampleInputName">
+            <input type="text" class="form-control" id="exampleInputName">
         </div>
         <div class="form-floating mb-4">
-            <textarea name="content" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                       style="height: 100px"></textarea>
             <label for="floatingTextarea2">Напишите что-нибудь...</label>
         </div>
