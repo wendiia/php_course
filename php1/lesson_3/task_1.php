@@ -9,7 +9,7 @@ if (!empty($_GET['operation']) && isset($_GET['first_num']) && isset($_GET['seco
             $result = (int)$_GET['first_num'] - (int)$_GET['second_num'];
             break;
         case 'division':
-            if (!empty($_GET['second_num'])) {
+            if ((int)($_GET['second_num']) != 0) {
                 $result = (int)$_GET['first_num'] / (int)$_GET['second_num'];
                 break;
             }

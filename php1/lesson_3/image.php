@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/task_2_functions.php';
+$images = scandir(__DIR__ . '/images');
 ?>
 <!doctype html>
 <html lang="en">

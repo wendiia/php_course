@@ -1,14 +1,12 @@
 <?php
+include __DIR__ . '/functions_task_2.php';
+
 $result = null;
 $d = null;
 
 if (!empty($_POST['a']) && !empty($_POST['b']) && !empty($_POST['c'])) {
-    include __DIR__ . '/functions_task_2.php';
     $d = discriminant($_POST['a'], $_POST['b'], $_POST['c']);
     $result = quadraticEquation($_POST['a'], $_POST['b'], $_POST['c']);
-}
-else {
-    $result = 'заполните все поля!';
 }
 ?>
 <!doctype html>
@@ -50,19 +48,18 @@ else {
         <?php if (isset($d)) { ?>
             <p class="display-6"> D = <?php echo $d; ?> </p>
         <?php } ?>
-
         <p class="display-6 text-center text-primary fw-normal"> Результат вычислений: <br>
             <?php
-            if ($result) {
-                if (is_array($result)) {
+            if ($result !== null) {
+                if (count($result) == 2) {
                     echo 'x1 = ' . $result[0] . ', x2 = ' . $result[1];
+                } elseif (count($result) == 1) {
+                    echo $result[0];
+                } else {
+                    echo 'Дискриминант меньше 0, корней нет!';
                 }
-                else {
-                    echo $result;
-                }
-            }
-            else {
-                echo 'Дискриминант меньше 0, корней нет!';
+            } else {
+                echo '';
             }
             ?>
         </p>

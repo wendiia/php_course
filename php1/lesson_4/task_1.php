@@ -18,7 +18,7 @@ $records = file($path);
         <div class="row g-3 mb-3">
             <?php foreach ($records as $record) { ?>
                 <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
-                    <p class="p-0 m-0"> <?php echo $record; ?> </p>
+                    <p class="p-0 m-0"> <?php echo $record; ?></p>
                 </div>
             <?php } ?>
         </div>
