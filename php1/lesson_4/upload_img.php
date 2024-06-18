@@ -22,6 +22,6 @@ if (isset($_FILES['img']) && empty($_FILES['img']['error'])) {
 //    move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . $imageName);
 }
 
-header('Location: /task_2.php');
+header('Location: /index.php');
 exit;
 
