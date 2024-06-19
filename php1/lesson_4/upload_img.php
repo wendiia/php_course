@@ -2,26 +2,29 @@
 
 $images = scandir(__DIR__ . '/images');
 
-if (isset($_FILES['img']) && empty($_FILES['img']['error'])) {
+if (
+    isset($_FILES['img']) &&
+    empty($_FILES['img']['error']) &&
+    (
+        $_FILES['img']['type'] === 'image/jpeg' ||
+        $_FILES['img']['type'] === 'image/png'
+    )
+) {
     $imgPrefix = 1;
     $path = __DIR__ . '/images';
-    $imageName = $_FILES['img']['name'];
+    $imageInfo = pathinfo($_FILES['img']['name']);
+    $newImageName = $_FILES['img']['name'];
 
-// Вариант 1
-// date_default_timezone_set('Europe/Moscow');
-// move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . time() . '_' . $_FILES['img']['name']);
-
-// Вариант 2
-    while (in_array($imageName, $images)) {
-        $imageName =
-            pathinfo($_FILES['img']['name'])['filename'] .
+    while (in_array($newImageName, $images)) {
+        $newImageName =
+            $imageInfo['filename'] .
             '_' . $imgPrefix . '.' .
-            pathinfo($_FILES['img']['name'])['extension'];
+            $imageInfo['extension'];
         $imgPrefix++;
     }
-    move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . $imageName);
+    move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . $newImageName);
 }
 
-header('Location: /index.php');
+header('Location: /task_2.php');
 exit;
 

@@ -6,7 +6,7 @@ $images = scandir(__DIR__ . '/images');
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <title> Lesson 3 </title>
+    <title> Lesson 4 </title>
 </head>
 <body>
 <div class="container">
@@ -29,7 +29,7 @@ $images = scandir(__DIR__ . '/images');
     <h4 class="display-4 text-center mb-5"> Загрузи своего котика </h4>
 
     <form action="/upload_img.php" method="post" enctype="multipart/form-data">
-        <input class="form-control mb-3" type="file" name="img" accept="image/png, image/jpeg"/>
+        <input class="form-control mb-3" type="file" name="img"/>
         <input class="btn btn-primary" type="submit">
     </form>
 </div>

@@ -16,7 +16,7 @@ $images = scandir(__DIR__ . '/images');
 
     <div class="row justify-content-center g-4">
         <div class="col-auto">
-            <img width="400" height="400" class="object-fit-cover" src="/images/<?php echo $images[$_GET['id']];?>" alt="cat">
+            <img width="400" height="400" class="object-fit-cover" src="/images/<?php echo $images[$_GET['id']]; ?>" alt="cat">
         </div>
     </div>
 

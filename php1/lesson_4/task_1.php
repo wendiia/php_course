@@ -1,6 +1,10 @@
 <?php
+
+include __DIR__ . '/functions.php';
+
 $path = __DIR__ . '/records.txt';
-$records = file($path);
+$records = fileRead($path);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,10 +20,14 @@ $records = file($path);
         <h3 class="text-center display-5 mb-4"> Гостевая книга </h3>
 
         <div class="row g-3 mb-3">
-            <?php foreach ($records as $record) { ?>
-                <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
-                    <p class="p-0 m-0"> <?php echo $record; ?></p>
-                </div>
+            <?php if (null !== $records) {
+                foreach ($records as $record) { ?>
+                    <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
+                        <p class="p-0 m-0"> <?php echo $record; ?></p>
+                    </div>
+                <?php }
+            } else { ?>
+                <p class="text-secondary text-center display-6"> Пока нет никаки записей! </p>
             <?php } ?>
         </div>
 

@@ -29,7 +29,7 @@ if (getCurrentUser()) {
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/login.php"> Войти </a>
         </li>
-        <?php if (getCurrentUser()) { ?>
+        <?php if (null !== getCurrentUser()) { ?>
             <li class="nav-item">
                 <p class="nav-link text-success"> <?php echo getCurrentUser(); ?> </p>
             </li>

@@ -26,7 +26,7 @@ $images = scandir(__DIR__ . '/images');
         <li class="nav-item">
             <a class="nav-link" href="/login.php"> Войти </a>
         </li>
-        <?php if (getCurrentUser()) { ?>
+        <?php if (null !== getCurrentUser()) { ?>
             <li class="nav-item">
                 <p class="nav-link text-success"> <?php echo getCurrentUser(); ?> </p>
             </li>
@@ -49,9 +49,9 @@ $images = scandir(__DIR__ . '/images');
         } ?>
     </div>
 
-    <?php if (getCurrentUser()) { ?>
+    <?php if (null !== getCurrentUser()) { ?>
         <h4 class="display-4 text-center mb-5"> Загрузи своего котика </h4>
-        <form action="/upload_img.php" method="post" enctype="multipart/form-data">
+        <form action="/upload_img.php" method="post" enctype="multipart/form-data" class="mb-4">
             <input class="form-control mb-3" type="file" name="img" accept="image/png, image/jpeg"/>
             <input class="btn btn-primary" type="submit">
         </form>
