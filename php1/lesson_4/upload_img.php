@@ -8,18 +8,18 @@ if (isset($_FILES['img']) && empty($_FILES['img']['error'])) {
     $imageName = $_FILES['img']['name'];
 
 // Вариант 1
- date_default_timezone_set('Europe/Moscow');
- move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . time() . '_' . $_FILES['img']['name']);
+// date_default_timezone_set('Europe/Moscow');
+// move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . time() . '_' . $_FILES['img']['name']);
 
 // Вариант 2
-//    while (in_array($imageName, $images)) {
-//        $imageName =
-//            pathinfo($_FILES['img']['name'])['filename'] .
-//            '_' . $imgPrefix . '.' .
-//            pathinfo($_FILES['img']['name'])['extension'];
-//        $imgPrefix++;
-//    }
-//    move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . $imageName);
+    while (in_array($imageName, $images)) {
+        $imageName =
+            pathinfo($_FILES['img']['name'])['filename'] .
+            '_' . $imgPrefix . '.' .
+            pathinfo($_FILES['img']['name'])['extension'];
+        $imgPrefix++;
+    }
+    move_uploaded_file($_FILES['img']['tmp_name'], $path . '/' . $imageName);
 }
 
 header('Location: /index.php');
