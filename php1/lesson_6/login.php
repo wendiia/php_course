@@ -5,7 +5,7 @@ session_start();
 include __DIR__ . "/Authentication.php";
 $exAuthentication = new Authentication;
 
-if ($exAuthentication->getCurrentUser()) {
+if (null !== $exAuthentication->getCurrentUser()) {
     header('Location: index.php');
 }
 ?>
@@ -43,7 +43,7 @@ if ($exAuthentication->getCurrentUser()) {
                 !empty($_POST['login']) &&
                 !empty($_POST['password'])
             ) {
-                if ($exAuthentication->checkPassword($_POST['login'], $_POST['password'])) {
+                if (true === $exAuthentication->checkPassword($_POST['login'], $_POST['password'])) {
                     $_SESSION['login'] = $_POST['login']; ?>
                     <p class="text-success"> Вы успешно вошли в систему! </p>
                 <?php } else { ?>

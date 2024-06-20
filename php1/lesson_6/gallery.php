@@ -35,7 +35,7 @@ $images = scandir(__DIR__ . '/images');
         } ?>
     </div>
 
-    <?php if ($exAuthentication->getCurrentUser()) { ?>
+    <?php if (null !== $exAuthentication->getCurrentUser()) { ?>
         <h4 class="display-4 text-center mb-5"> Загрузи своего котика </h4>
         <form action="/upload_img.php" method="post" enctype="multipart/form-data">
             <input class="form-control mb-3" type="file" name="img" accept="image/png, image/jpeg"/>

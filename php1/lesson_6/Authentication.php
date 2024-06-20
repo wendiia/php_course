@@ -9,23 +9,23 @@ class Authentication
         $this->users = [
             [
                 'login' => 'biba',
-                'password' => password_hash('biba', PASSWORD_DEFAULT)
+                'password' => '$2y$10$BF0nhl5d66js6YG/F74oaO8CapbRTkVXbpPn7j.IBHJUHPvrY0bSa'
             ],
             [
                 'login' => 'boba',
-                'password' => password_hash('boba', PASSWORD_DEFAULT)
+                'password' => '$2y$10$2Du1UUuym6f9z/veh7dkduOh06jdmHEFYKZl.Exy7A.Sn9dRdnXh.'
             ],
             [
                 'login' => 'pupa',
-                'password' => password_hash('pupa', PASSWORD_DEFAULT)
+                'password' => '$2y$10$XflHJmZy4IIJQ9V4CP2AEuZ62W2gf3P7T7ypkuXKtEX5dNl19C74a'
             ],
             [
                 'login' => 'lupa',
-                'password' => password_hash('lupa', PASSWORD_DEFAULT)
+                'password' => '$2y$10$01xwxCXxEt/ygbFwhDhR.uRvU8HntRphxF41uZbc9eV/mbhSbXgzu'
             ],
             [
                 'login' => 'starpony',
-                'password' => password_hash('starpony', PASSWORD_DEFAULT)
+                'password' => '$2y$10$jPG0j2R.rNA9sVz9DxlsDOoJyN5X/vd7A4i0Hh.qfWL5wBPhl6CKq'
             ],
         ];
     }
@@ -35,31 +35,32 @@ class Authentication
         return $this->users;
     }
 
-    public function existsUser($login): int|false
+    public function existsUser($login): bool
     {
-        return array_search($login, array_column($this->users, 'login'));
+        return in_array($login, array_column($this->users, 'login'));
+    }
+
+    public function getIndexUser($login): ?int
+    {
+        if (true === $this->existsUser($login)) {
+            return array_search($login, array_column($this->users, 'login'));
+        }
+
+        return null;
     }
 
     public function checkPassword($login, $password): bool
     {
-        $findIndexLogin = $this->existsUser($login);
-
-        if (
-            $findIndexLogin !== false &&
-            password_verify($password, $this->users[$findIndexLogin]['password'])
-        ) {
-            return true;
+        if (true === $this->existsUser($login)) {
+            return password_verify($password, $this->users[$this->getIndexUser($login)]['password']);
         }
 
         return false;
     }
 
-    public function getCurrentUser(): string|null
+    public static function getCurrentUser(): string|null
     {
-        if (
-            isset($_SESSION['login']) &&
-            $this->existsUser($_SESSION['login']) !== false
-        ) {
+        if (isset($_SESSION['login'])) {
             return $_SESSION['login'];
         }
 

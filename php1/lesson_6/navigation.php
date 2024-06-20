@@ -16,7 +16,7 @@ $currentUser = $exAuthentication->getCurrentUser();
     <li class="nav-item">
         <a class="nav-link" href="/login.php"> Войти </a>
     </li>
-    <?php if ($currentUser) { ?>
+    <?php if (null !== $currentUser) { ?>
         <li class="nav-item">
             <p class="nav-link text-success"> <?php echo $currentUser; ?> </p>
         </li>
