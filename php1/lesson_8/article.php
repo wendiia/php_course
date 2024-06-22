@@ -6,7 +6,7 @@ include __DIR__ . '/classes/News.php';
 include __DIR__ . '/classes/Authentication.php';
 
 $pathTemplate = __DIR__ . '/templates/article.php';
-$exNews = new News;
+$exNews = new News();
 $news = $exNews->getAllNews();
 $article = null;
 

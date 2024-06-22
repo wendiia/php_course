@@ -38,9 +38,4 @@ class News
 
         return $this->db->query($sql, $data);
     }
-
 }
-
-
-
-

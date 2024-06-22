@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include __DIR__ . '/classes/News.php';
 include __DIR__ . '/classes/Authentication.php';

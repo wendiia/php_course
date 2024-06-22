@@ -1,4 +1,5 @@
 <?php
+
 $images = scandir(__DIR__ . '/images');
 ?>
 <!doctype html>

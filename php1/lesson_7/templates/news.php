@@ -28,6 +28,4 @@
             <input class="btn btn-primary" type="submit" value="Добавить">
         </form>
     <?php } ?>
-
 </section>
-

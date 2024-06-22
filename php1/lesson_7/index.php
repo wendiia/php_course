@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include __DIR__ . '/classes/View.php';
 include __DIR__ . '/classes/GuestBook.php';

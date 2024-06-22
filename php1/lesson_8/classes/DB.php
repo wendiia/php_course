@@ -1,6 +1,7 @@
 <?php
 
-class DB {
+class DB
+{
     protected string $pathConfig = __DIR__ . '/../data/config.txt';
     protected string $dsn;
     protected object $dbh;
@@ -18,7 +19,7 @@ class DB {
         return $this->sth->execute();
     }
 
-    public function query(string $sql, array $data=[]): array | false
+    public function query(string $sql, array $data = []): array | false
     {
         $this->prepare($sql);
         $res = $this->sth->execute($data);

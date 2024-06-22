@@ -5,6 +5,7 @@ class Article
     protected string $author;
     protected string $title;
     protected string $text;
+
     public function __construct(string $author, string $title, string $text)
     {
         $this->author = $author;
@@ -12,22 +13,22 @@ class Article
         $this->title = $title;
     }
 
-    function getTitle(): string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    function getText(): string
+    public function getText(): string
     {
         return $this->text;
     }
 
-    function getAuthor(): string
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
-    function getAttributesList(): array
+    public function getAttributesList(): array
     {
         return [$this->author, $this->title, $this->text];
     }

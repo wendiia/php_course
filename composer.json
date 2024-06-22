@@ -1,0 +1,17 @@
+{
+    "name": "wendi/php_course",
+    "autoload": {
+        "psr-4": {
+            "Wendi\\PhpCourse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wendia",
+            "email": "wendia1234qwer@mail.ru"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    }
+}
