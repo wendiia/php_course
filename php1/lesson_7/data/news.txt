@@ -1,0 +1,7 @@
+Biba    Новость 1    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda beatae blanditiis cum cupiditate ea est Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda beatae blanditiis cum cupiditate ea est
+Starpony    Новость 2    Тут будет описание 2
+Boba    Новость 3    Тут будет описание 3
+Pupa    Новость 4    Тут будет описание 4
+Lupa    Новость 5    Тут будет описание 5
+lupa    x    xx
+boba    g    ghjghgj

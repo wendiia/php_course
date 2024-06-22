@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . "/Uploader.php";
+include __DIR__ . '/classes/ImgUploader.php';
 
 $exUploader = new ImgUploader('img');
 $exUploader->upload();
