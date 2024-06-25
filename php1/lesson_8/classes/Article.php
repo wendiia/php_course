@@ -27,10 +27,4 @@ class Article
     {
         return $this->author;
     }
-
-    public function getAttributesList(): array
-    {
-        return [$this->author, $this->title, $this->text];
-    }
-
 }

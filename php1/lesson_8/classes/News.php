@@ -2,6 +2,7 @@
 
 include __DIR__ . '/Article.php';
 include __DIR__ . '/DB.php';
+
 class News
 {
     protected DB $db;
@@ -10,32 +11,20 @@ class News
     public function __construct()
     {
         $this->db = new DB();
-        $this->getAllNews();
-    }
-
-    public function getAllNews(): array
-    {
-        $this->news = [];
         $sql = "SELECT * FROM news ORDER BY id DESC";
         $news = $this->db->query($sql);
 
         foreach ($news as $article) {
-            $this->news[] = new Article($article['author'], $article['title'], $article['text']);
+            $this->news[$article['id']] = new Article(
+                $article['author'],
+                $article['title'],
+                $article['text'],
+            );
         }
-
-        return $this->news;
     }
 
-    public function append(Article $article)
+    public function getAllNews(): array
     {
-        $data = [
-            'author' => $article->getAuthor(),
-            'title' => $article->getTitle(),
-            'text' => $article->getText()
-        ];
-
-        $sql = "INSERT INTO news (author, title, text) VALUES (:author, :title, :text)";
-
-        return $this->db->query($sql, $data);
+        return $this->news;
     }
 }

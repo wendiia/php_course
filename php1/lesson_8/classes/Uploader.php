@@ -33,11 +33,11 @@ class Uploader
             );
     }
 
-    public function upload(): bool
+    public function uploadImg(): bool
     {
         if (true === $this->isUploadedImg()) {
             $imgPrefix = 1;
-            $path = __DIR__ . '/images';
+            $path = __DIR__ . '/../images';
             $imageInfo = pathinfo($_FILES[$this->fieldName]['name']);
             $newImageName = $_FILES[$this->fieldName]['name'];
             $images = scandir($path);

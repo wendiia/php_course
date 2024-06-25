@@ -14,20 +14,5 @@
             </div>
         <?php } ?>
     </div>
-
-    <?php if (null !== $this->data['user']) { ?>
-        <h5 class="text-center display-6 mb-3"> Добавьте свою новость </h5>
-
-        <form action="/../upload_article.php" method="post" class="d-flex flex-column mb-5">
-            <label class="mb-2" for="inputTitle"> Название статьи: </label>
-            <input class="mb-3 form-control" id="inputTitle" type="text" name="title">
-
-            <label class="mb-2" for="inputContent"> Введите текст: </label>
-            <textarea class="mb-3 form-control" id="inputContent" name="content"></textarea>
-
-            <input class="btn btn-primary" type="submit" value="Добавить">
-        </form>
-    <?php } ?>
-
 </section>
 
