@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Authentication
 {
     protected array $users;
@@ -35,12 +37,12 @@ class Authentication
         return $this->users;
     }
 
-    public function existsUser($login): bool
+    public function existsUser(string $login): bool
     {
         return in_array($login, array_column($this->users, 'login'));
     }
 
-    protected function getIndexUser($login): ?int
+    public function getIndexUser(string $login): ?int
     {
         if (true === $this->existsUser($login)) {
             return array_search($login, array_column($this->users, 'login'));
@@ -49,7 +51,7 @@ class Authentication
         return null;
     }
 
-    public function checkPassword($login, $password): bool
+    public function checkPassword(string $login, string $password): bool
     {
         if (true === $this->existsUser($login)) {
             return password_verify($password, $this->users[$this->getIndexUser($login)]['password']);
@@ -58,7 +60,7 @@ class Authentication
         return false;
     }
 
-    public function getCurrentUser(): string|null
+    public static function getCurrentUser(): string|null
     {
         if (isset($_SESSION['login'])) {
             return $_SESSION['login'];

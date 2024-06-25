@@ -1,23 +1,20 @@
 <?php
 
-include __DIR__ . '/GuestBookRecord.php';
+require_once __DIR__ . '/GuestBookRecord.php';
 
-class GuestBook {
+class GuestBook
+{
     protected string $pathFile;
     protected array $data;
+
     public function __construct(string $pathFile)
     {
         $this->pathFile = $pathFile;
-        $file = fopen($pathFile, "r");
+        $fileData = file($pathFile, FILE_IGNORE_NEW_LINES);
 
-        while (!feof($file)) {
-            $dataTemp = trim(fgets($file));
-            if ('' !== $dataTemp) {
-                $this->data[] = new GuestBookRecord($dataTemp);
-            }
+        foreach ($fileData as $item) {
+            $this->data[] = new GuestBookRecord($item);
         }
-
-        fclose($file);
     }
 
     public function getData(): array

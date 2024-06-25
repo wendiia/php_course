@@ -20,7 +20,7 @@
             !empty($_POST['login']) &&
             !empty($_POST['password'])
         ) {
-            if (true === $this->data['checkAuth']) {
+            if (true === $this->data['exAuthentication']->checkPassword($_POST['login'], $_POST['password'])) {
                 $_SESSION['login'] = $_POST['login']; ?>
                 <p class="text-success"> Вы успешно вошли в систему! </p>
             <?php } else { ?>

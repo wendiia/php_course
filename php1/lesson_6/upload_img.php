@@ -2,7 +2,7 @@
 
 include __DIR__ . "/Uploader.php";
 
-$exUploader = new ImgUploader('img');
+$exUploader = new Uploader('img');
 $exUploader->upload();
 
 header('Location: /gallery.php');

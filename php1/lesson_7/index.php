@@ -8,8 +8,9 @@ include __DIR__ . '/classes/Authentication.php';
 $pathTemplate = __DIR__ . '/templates/index.php';
 $pathFileRecords = __DIR__ . '/data/records.txt';
 $bookRecords = new GuestBook($pathFileRecords);
+$auth = new Authentication();
 
 $view = new View();
 $view->assign('records', $bookRecords->getData());
-$view->assign('user', Authentication::getCurrentUser());
+$view->assign('user', $auth->getCurrentUser());
 echo $view->render($pathTemplate);

@@ -1,8 +1,10 @@
 <?php
 
+namespace App;
+
 session_start();
 
-include __DIR__ . "/Authentication.php";
+include __DIR__ . '/../autoload.php';
 
 class ImgUploader
 {
@@ -51,9 +53,9 @@ class ImgUploader
             move_uploaded_file($_FILES['img']['tmp_name'], $this->pathImages . '/' . $newImageName);
 
             $dataLog = implode('   ', [
-                Authentication::getCurrentUser(),
-                date("Y.m.d H:i"),
-                $newImageName
+                    Authentication::getCurrentUser(),
+                    date("Y.m.d H:i"),
+                    $newImageName
             ]);
 
             file_put_contents($this->pathLogs, $dataLog . PHP_EOL, FILE_APPEND);

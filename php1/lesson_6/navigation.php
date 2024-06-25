@@ -2,7 +2,7 @@
 
 include_once __DIR__ . "/Authentication.php";
 
-$exAuthentication = new Authentication;
+$exAuthentication = new Authentication();
 $currentUser = $exAuthentication->getCurrentUser();
 ?>
 

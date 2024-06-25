@@ -1,10 +1,12 @@
 <?php
 
-include __DIR__ . '/Article.php';
+require_once __DIR__ . '/Article.php';
 
-class News {
+class News
+{
     protected string $pathFile;
     protected array $news = [];
+
     public function __construct(string $pathFile)
     {
         $this->pathFile = $pathFile;
@@ -27,15 +29,25 @@ class News {
         return $this;
     }
 
-    public function save(): News
+    public function save(): bool
     {
         $records = [];
 
         foreach ($this->news as $article) {
-            $records[] = implode('    ', $article->getAttributesList());
+            $records[] = implode(
+                '    ',
+                [
+                    $article->getAuthor(),
+                    $article->getTitle(),
+                    $article->getText()
+                ]
+            );
         }
 
-        file_put_contents($this->pathFile, implode(PHP_EOL, $records));
-        return $this;
+        if (false !== file_put_contents($this->pathFile, implode(PHP_EOL, $records))) {
+            return true;
+        }
+
+        return false;
     }
 }

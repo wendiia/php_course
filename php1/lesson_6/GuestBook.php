@@ -2,16 +2,18 @@
 
 include __DIR__ . "/TextFile.php";
 
-class GuestBook extends TextFile {
-    public function append($text) : GuestBook
+class GuestBook extends TextFile
+{
+    public function append($text): GuestBook
     {
-        $this->data[] = $text;
+        if (!empty($text)) {
+            $this->data[] = trim($text);
+        }
         return $this;
     }
 
-    public function save() : GuestBook
+    public function save(): void
     {
         file_put_contents($this->pathFile, implode(PHP_EOL, $this->data));
-        return $this;
     }
 }

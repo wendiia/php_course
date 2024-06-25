@@ -3,7 +3,7 @@
 session_start();
 
 include __DIR__ . "/Authentication.php";
-$exAuthentication = new Authentication;
+$exAuthentication = new Authentication();
 
 $images = scandir(__DIR__ . '/images');
 ?>

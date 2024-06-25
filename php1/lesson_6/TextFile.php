@@ -1,8 +1,10 @@
 <?php
+
 class TextFile
 {
     protected string $pathFile;
     protected array $data;
+
     public function __construct($pathFile)
     {
         $this->pathFile = $pathFile;
@@ -18,7 +20,7 @@ class TextFile
         fclose($file);
     }
 
-    public function getData() : array
+    public function getData(): array
     {
         return $this->data;
     }

@@ -11,4 +11,3 @@ if (!empty($_POST['record'])) {
 
 header('Location: /index.php');
 exit;
-

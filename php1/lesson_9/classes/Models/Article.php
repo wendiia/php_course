@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 class Article
 {
     protected string $author;
@@ -27,4 +29,10 @@ class Article
     {
         return $this->author;
     }
+
+    public function getAttributesList(): array
+    {
+        return [$this->author, $this->title, $this->text];
+    }
+
 }
