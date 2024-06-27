@@ -9,13 +9,11 @@ $pathTemplate = __DIR__ . '/templates/article.php';
 $auth = new Authentication();
 $exNews = new News();
 $news = $exNews->getAllNews();
-$article = null;
+$view = new View();
 
 if (isset($_GET['id']) && !empty($news[$_GET['id']])) {
-    $article = $news[$_GET['id']];
+    $view->assign('article', $news[$_GET['id']]);
 }
 
-$view = new View();
-$view->assign('article', $article);
 $view->assign('user', $auth->getCurrentUser());
 echo $view->render($pathTemplate);

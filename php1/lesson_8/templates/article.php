@@ -2,7 +2,7 @@
 
 <a href="../index.php" class="fs-5 mb-5"> Назад </a>
 
-<?php if (null !== $this->data['article']) { ?>
+<?php if (!empty($this->data['article'])) { ?>
     <div class="row g-3 mb-5">
         <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
             <p class="p-0 m-0"> <?php echo $this->data['article']->getAuthor(); ?></p>

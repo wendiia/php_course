@@ -17,11 +17,11 @@
 
         <?php
         if (
-            !empty($_POST['login']) &&
-            !empty($_POST['password'])
+            !empty($this->data['login']) &&
+            !empty($this->data['password'])
         ) {
             if (true === $this->data['checkAuth']) {
-                $_SESSION['login'] = $_POST['login']; ?>
+                $_SESSION['login'] = $this->data['login']; ?>
                 <p class="text-success"> Вы успешно вошли в систему! </p>
             <?php } else { ?>
                 <p class="text-danger"> Неверный логин или пароль! </p>

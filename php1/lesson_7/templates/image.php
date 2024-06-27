@@ -2,14 +2,14 @@
 
 <?php
 if (
-    !empty($_GET['id']) &&
-    !empty($this->data['images'][$_GET['id']])
+    !empty($this->data['id']) &&
+    null !== $this->data['image']
 ) {
     ?>
     <div class="row justify-content-center g-4">
         <div class="col-auto">
             <img width="400" height="400" class="object-fit-cover"
-                 src="/images/<?php echo $this->data['images'][$_GET['id']]; ?>" alt="cat">
+                 src="/images/<?php echo $this->data['image']; ?>" alt="cat">
         </div>
     </div>
 
