@@ -14,7 +14,7 @@ class News
 
         foreach ($news as $article) {
             $article = explode('    ', $article);
-            $this->news[] = new Article($article[0], $article[1], $article[2]);
+            $this->news[] = new Article($article[0], $article[1]);
         }
     }
 
@@ -37,7 +37,6 @@ class News
             $records[] = implode(
                 '    ',
                 [
-                    $article->getAuthor(),
                     $article->getTitle(),
                     $article->getText()
                 ]

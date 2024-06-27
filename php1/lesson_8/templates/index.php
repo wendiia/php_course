@@ -5,7 +5,7 @@
         <?php foreach ($this->data['news'] as $key => $article) { ?>
             <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
                 <p class="p-0 m-0"> <?php echo $article->getAuthor(); ?></p>
-                <a class="fs-5" href="/../article.php?id=<?php echo $key; ?>">
+                <a class="fs-5" href="/../article.php?id=<?php echo $article->getId(); ?>">
                     <?php echo $article->getTitle() ?>
                 </a>
                 <p class="p-0 m-0">

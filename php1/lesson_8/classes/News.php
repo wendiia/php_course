@@ -16,9 +16,10 @@ class News
 
         foreach ($news as $article) {
             $this->news[$article['id']] = new Article(
+                $article['id'],
                 $article['author'],
                 $article['title'],
-                $article['text'],
+                $article['text']
             );
         }
     }

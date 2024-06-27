@@ -12,7 +12,7 @@ if (
     null !== $auth->getCurrentUser()
 ) {
     $news = new News($pathFileNews);
-    $article = new Article($auth->getCurrentUser(), $_POST['title'], $_POST['content']);
+    $article = new Article($_POST['title'], $_POST['content']);
     $news->append($article)->save();
 }
 

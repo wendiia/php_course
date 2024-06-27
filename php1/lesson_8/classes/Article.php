@@ -2,15 +2,22 @@
 
 class Article
 {
+    protected string $id;
     protected string $author;
     protected string $title;
     protected string $text;
 
-    public function __construct(string $author, string $title, string $text)
+    public function __construct(string $id, string $author, string $title, string $text)
     {
+        $this->id = $id;
         $this->author = $author;
         $this->text = $text;
         $this->title = $title;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getTitle(): string
