@@ -15,13 +15,13 @@ class DB
 
     public function execute(string $sql): bool
     {
-        $this->prepare($sql);
+        $this->sth = $this->dbh->prepare($sql);
         return $this->sth->execute();
     }
 
     public function query(string $sql, array $data = []): array | false
     {
-        $this->prepare($sql);
+        $this->sth = $this->dbh->prepare($sql);
         $res = $this->sth->execute($data);
 
         if (false === $res) {
@@ -29,10 +29,5 @@ class DB
         }
 
         return $this->sth->fetchAll();
-    }
-
-    public function prepare(string $sql): void
-    {
-        $this->sth = $this->dbh->prepare($sql);
     }
 }

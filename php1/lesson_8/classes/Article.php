@@ -11,8 +11,8 @@ class Article
     {
         $this->id = $id;
         $this->author = $author;
-        $this->text = $text;
         $this->title = $title;
+        $this->text = $text;
     }
 
     public function getId(): string

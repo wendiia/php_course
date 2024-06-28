@@ -8,10 +8,8 @@
 <body>
 
 <div class="container align-center">
-    <?php
-    include __DIR__ . '/navigation.php';
-    include $template;
-    ?>
+    <h1 class="display-1 text-center mb-5"> 404 </h1>
+    <h3 class="display-3 text-center mb-5"> Даная страница не найдена </h3>
 </div>
 
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>
@@ -20,4 +18,3 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
-

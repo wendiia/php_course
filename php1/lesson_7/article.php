@@ -1,22 +1,19 @@
 <?php
 
-session_start();
 include __DIR__ . '/classes/View.php';
 include __DIR__ . '/classes/News.php';
-include __DIR__ . '/classes/Authentication.php';
 
 $pathTemplate = __DIR__ . '/templates/article.php';
 $pathFileNews = __DIR__ . '/data/news.txt';
-$auth = new Authentication();
-$exNews = new News($pathFileNews);
-$news = $exNews->getAllNews();
-$article = null;
-
+$news = new News($pathFileNews);
 $view = new View();
+$article = $news->getArticleById($_GET['id']);
 
-if (isset($_GET['id']) && !empty($news[$_GET['id']])) {
-    $view->assign('article', $news[$_GET['id']]);
+if (null === $article) {
+    header("HTTP/1.1 404 Not Found");
+    $view->display(__DIR__ . '/templates/notFound.php');
+    exit();
 }
 
-$view->assign('user', $auth->getCurrentUser());
-echo $view->render($pathTemplate);
+$view->assign('article', $article);
+$view->display($pathTemplate);

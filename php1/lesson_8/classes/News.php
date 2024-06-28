@@ -6,16 +6,16 @@ include __DIR__ . '/DB.php';
 class News
 {
     protected DB $db;
-    protected array $news;
+    protected array $articles;
 
     public function __construct()
     {
         $this->db = new DB();
         $sql = "SELECT * FROM news ORDER BY id DESC";
-        $news = $this->db->query($sql);
+        $articlesParts = $this->db->query($sql);
 
-        foreach ($news as $article) {
-            $this->news[$article['id']] = new Article(
+        foreach ($articlesParts as $article) {
+            $this->articles[$article['id']] = new Article(
                 $article['id'],
                 $article['author'],
                 $article['title'],
@@ -24,8 +24,17 @@ class News
         }
     }
 
-    public function getAllNews(): array
+    public function getAllArticles(): array
     {
-        return $this->news;
+        return $this->articles;
+    }
+
+    public function getArticleById($id): ?Article
+    {
+        if (!empty($id) && !empty($this->articles[$id])) {
+            return $this->articles[$id];
+        }
+
+        return null;
     }
 }

@@ -5,27 +5,38 @@ require_once __DIR__ . '/Article.php';
 class News
 {
     protected string $pathFile;
-    protected array $news = [];
+    protected array $articles = [];
 
     public function __construct(string $pathFile)
     {
         $this->pathFile = $pathFile;
-        $news = file($pathFile, FILE_IGNORE_NEW_LINES);
+        $newsParts = file($pathFile, FILE_IGNORE_NEW_LINES);
+        $articleId = 1;
 
-        foreach ($news as $article) {
-            $article = explode('    ', $article);
-            $this->news[] = new Article($article[0], $article[1]);
+        foreach ($newsParts as $article) {
+            $articleParts = explode('    ', $article);
+            $this->articles[$articleId] = new Article($articleParts[0], $articleParts[1]);
+            $articleId++;
         }
     }
 
-    public function getAllNews(): array
+    public function getAllArticles(): array
     {
-        return $this->news;
+        return $this->articles;
+    }
+
+    public function getArticleById($id): ?Article
+    {
+        if (!empty($id) && !empty($this->articles[$id])) {
+            return $this->articles[$id];
+        }
+
+        return null;
     }
 
     public function append(Article $article): News
     {
-        $this->news[] = $article;
+        $this->articles[] = $article;
         return $this;
     }
 
@@ -33,7 +44,7 @@ class News
     {
         $records = [];
 
-        foreach ($this->news as $article) {
+        foreach ($this->articles as $article) {
             $records[] = implode(
                 '    ',
                 [

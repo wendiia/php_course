@@ -1,15 +1,11 @@
 <?php
 
-session_start();
 include __DIR__ . '/classes/News.php';
-include __DIR__ . '/classes/Authentication.php';
 $pathFileNews = __DIR__ . '/data/news.txt';
-$auth = new Authentication();
 
 if (
     !empty(trim($_POST['title'])) &&
-    !empty(trim($_POST['content'])) &&
-    null !== $auth->getCurrentUser()
+    !empty(trim($_POST['content']))
 ) {
     $news = new News($pathFileNews);
     $article = new Article($_POST['title'], $_POST['content']);
