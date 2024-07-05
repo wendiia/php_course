@@ -1,16 +1,20 @@
-<ul class="nav justify-content-center">
-    <li class="nav-item">
-        <a class="nav-link" href="/../index.php"> Главная </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/../gallery.php"> Котогалерея </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/../login.php"> Войти </a>
-    </li>
-    <?php if (null !== $this->data['user']) { ?>
-        <li class="nav-item">
-            <p class="nav-link text-success"> <?php echo $this->data['user']; ?> </p>
-        </li>
-    <?php } ?>
-</ul>
+<nav class="mt-3">
+    <ul class="d-flex">
+        <li class="me-5"><a href="/gallery.php"> Фотогалерея </a></li>
+        <li class="me-5"><a href="/albums.php"> Альбомы </a></li>
+
+        <?php
+        if (!empty($_SESSION['login'])) { ?>
+            <li class="me-5 fs-6 text-success fw-bold">
+                <p><?php echo $_SESSION['login'];?></p>
+            </li>
+
+            <li class="me-5"><a href="/logout.php"> Выйти </a></li>
+            <?php
+        } else { ?>
+            <li class="me-5"><a href="/login.php"> Войти </a></li>
+            <?php
+        } ?>
+
+    </ul>
+</nav>

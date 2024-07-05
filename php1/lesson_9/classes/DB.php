@@ -6,26 +6,30 @@ use PDO;
 
 class DB
 {
-    protected string $pathConfig = __DIR__ . '/../data/config.txt';
     protected string $dsn;
     protected object $dbh;
     protected object $sth;
 
     public function __construct()
     {
-        $this->dsn = file_get_contents($this->pathConfig);
+        $this->dsn = file_get_contents(__DIR__ . '/../data/config.txt');
         $this->dbh = new PDO($this->dsn, 'root', '');
     }
 
-    public function execute(string $sql): bool
+    public function execute(string $sql, array $data = null): bool
     {
-        $this->prepare($sql);
-        return $this->sth->execute();
+        $this->sth = $this->dbh->prepare($sql);
+        return $this->sth->execute($data);
     }
 
-    public function query(string $sql, array $data = []): array | false
+    public function getLastInsertId(): int
     {
-        $this->prepare($sql);
+        return $this->dbh->lastInsertId();
+    }
+
+    public function query(string $sql, array $data = null): array|false
+    {
+        $this->sth = $this->dbh->prepare($sql);
         $res = $this->sth->execute($data);
 
         if (false === $res) {
@@ -33,10 +37,5 @@ class DB
         }
 
         return $this->sth->fetchAll();
-    }
-
-    public function prepare(string $sql): void
-    {
-        $this->sth = $this->dbh->prepare($sql);
     }
 }

@@ -4,7 +4,7 @@ class View
 {
     protected array $data;
 
-    public function assign($name, $value): void
+    public function assign(string $name, $value): void
     {
         $this->data[$name] = $value;
     }
@@ -14,7 +14,7 @@ class View
         echo $this->render($template);
     }
 
-    public function render(string $template)
+    public function render(string $template): string
     {
         if (!empty($this->data)) {
             foreach ($this->data as $key => $item) {

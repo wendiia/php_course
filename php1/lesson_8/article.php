@@ -9,7 +9,7 @@ $view = new View();
 $article = $news->getArticleById($_GET['id']);
 
 if (null === $article) {
-    header("HTTP/1.1 404 Not Found");
+    http_response_code(404);
     $view->display(__DIR__ . '/templates/notFound.php');
     exit();
 }

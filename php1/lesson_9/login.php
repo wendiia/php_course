@@ -1,19 +1,33 @@
 <?php
 
+session_start();
+
+require __DIR__ . '/autoload.php';
+
 use App\View;
 use App\Authentication;
 
-session_start();
-include __DIR__ . '/autoload.php';
-
-$pathTemplate = __DIR__ . '/templates/login.php';
-$exAuthentication = new Authentication();
-
-if (null !== Authentication::getCurrentUser()) {
-    header('Location: index.php');
+if (!empty($_SESSION['login'])) {
+    header('Location: /gallery.php');
+    exit();
 }
 
+$template = __DIR__ . '/templates/login.php';
+$auth = new Authentication();
 $view = new View();
-$view->assign('exAuthentication', $exAuthentication);
-$view->assign('user', Authentication::getCurrentUser());
-$view->display($pathTemplate);
+
+if (
+    !empty($_POST['login']) &&
+    !empty($_POST['password'])
+) {
+    $checkAuth = $auth->checkLoginPassword($_POST['login'], $_POST['password']);
+
+    if (true === $checkAuth) {
+        $_SESSION['login'] = $_POST['login'];
+    }
+
+    $view->assign('login', $_POST['login']);
+    $view->assign('checkAuth', $checkAuth);
+}
+
+$view->display($template);

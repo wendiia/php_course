@@ -5,26 +5,27 @@ namespace App;
 class View
 {
     protected array $data;
-    protected string $templateLayout = __DIR__ . '/../templates/layout.php';
 
-    public function assign($name, $value): void
+    public function assign(string $name, $value): void
     {
         $this->data[$name] = $value;
     }
 
     public function display(string $template): void
     {
-        ob_start();
-        include $this->templateLayout;
-        $view = ob_get_contents();
-        ob_end_clean();
-        echo $view;
+        echo $this->render($template);
     }
 
     public function render(string $template): string
     {
+        if (!empty($this->data)) {
+            foreach ($this->data as $key => $item) {
+                $$key = $item;
+            }
+        }
+
         ob_start();
-        include $this->templateLayout;
+        include $template;
         $view = ob_get_contents();
         ob_end_clean();
         return $view;

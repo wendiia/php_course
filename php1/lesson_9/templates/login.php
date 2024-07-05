@@ -1,32 +1,47 @@
-<h3 class="display-3 text-center mb-4"> Вход </h3>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Lesson 9 </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container justify-content-center align-items-center d-flex flex-column">
 
-<div class="row justify-content-center g-4 mb-4">
-    <form class="col-5 d-flex flex-column align-items-center" action="/../login.php" method="post">
+    <?php require __DIR__ . '/navigation.php'; ?>
 
-        <div class="w-100">
-            <label for="login"> Логин: </label>
-            <input class="form-control mb-3" id="login" type="text" name="login">
+    <h1 class="display-3 mb-5"> Войти </h1>
+
+    <?php if (isset($checkAuth) && true === $checkAuth) { ?>
+        <h2 class="fs-4 text-success text-center"> Вы успешно вошли в систему! </h2>
+    <?php  } else { ?>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-6">
+                <form action="/login.php" method="post">
+                    <label class="display-6 mb-2" for="login"> Логин: </label>
+                    <input class="form-control d-inline mb-3" id="login" type="text" name="login"
+                           value="<?php echo !empty($login) ? $login : '' ?>">
+
+                    <label class="display-6 mb-2" for="password"> Пароль: </label>
+                    <input class="form-control d-inline mb-5" id="password" type="password" name="password">
+
+                    <input class="btn btn-primary w-100 mb-3" type="submit">
+
+                    <?php
+                    if (isset($checkAuth)) {
+                        if (false === $checkAuth) { ?>
+                            <h2 class="fs-6 text-danger text-center"> Неверный логин или пароль! </h2>
+                            <?php
+                        }
+                    } ?>
+                </form>
+            </div>
         </div>
-
-        <div class="w-100 mb-3">
-            <label for="password"> Пароль: </label>
-            <input class="form-control mb-3" id="password" type="password" name="password">
-        </div>
-
-        <input class="btn btn-primary d-block w-75 mb-3" type="submit">
-
-        <?php
-        if (
-            !empty($_POST['login']) &&
-            !empty($_POST['password'])
-        ) {
-            if (true === $this->data['exAuthentication']->checkPassword($_POST['login'], $_POST['password'])) {
-                $_SESSION['login'] = $_POST['login']; ?>
-                <p class="text-success"> Вы успешно вошли в систему! </p>
-            <?php } else { ?>
-                <p class="text-danger"> Неверный логин или пароль! </p>
-            <?php }
-        } ?>
-
-    </form>
+    <?php } ?>
 </div>
+</body>
+</html>

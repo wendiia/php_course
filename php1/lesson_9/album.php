@@ -4,23 +4,22 @@ session_start();
 
 require __DIR__ . '/autoload.php';
 
-use App\Images;
+use App\Albums;
 use App\View;
 use App\Authentication;
 
-$template = __DIR__ . '/templates/image.php';
 $auth = new Authentication();
+$albums = new Albums();
 $view = new View();
-$images = new Images();
+$template = __DIR__ . '/templates/album.php';
+$album = $albums->getAlbumByValue('id', $_GET['id']);
 
-$image = $images->getImageValue('id', $_GET['id']);
-
-if (null === $image) {
+if (null === $album) {
     http_response_code(404);
     $view->display(__DIR__ . '/templates/notFound.php');
     exit();
 }
 
 $view->assign('user', $auth->getCurrentUser());
-$view->assign('image', $image);
+$view->assign('album', $album);
 $view->display($template);
