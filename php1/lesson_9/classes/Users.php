@@ -8,7 +8,7 @@ class Users
 {
     public function getAllUsers(string $sortValue = null, string $typeSort = 'ASC'): ?array
     {
-        $db = new DB();
+        $db = new Db();
         $sql = "SELECT * FROM users";
 
         if (!empty($sortValue)) {
@@ -35,7 +35,7 @@ class Users
 
     public function getUserByValue(string $name, string $value): ?User
     {
-        $db = new DB();
+        $db = new Db();
         $sql = "SELECT * FROM users WHERE $name = :value";
         $res = $db->query($sql, ['value' => $value]);
 

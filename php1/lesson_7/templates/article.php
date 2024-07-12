@@ -10,16 +10,14 @@
 <div class="container align-center">
     <h3 class="display-3 text-center mb-5"> Статья </h3>
     <a href="../news.php" class="fs-5 mb-5"> Назад </a>
-    <?php if (!empty($article)) { ?>
-        <div class="row g-3 mb-5">
-            <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
-                <p class="fs-5">
-                    <?php echo $article->getTitle(); ?>
-                </p>
-                <p class="p-0 m-0"> <?php echo $article->getText(); ?></p>
-            </div>
+    <div class="row g-3 mb-5">
+        <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
+            <p class="fs-5">
+                <?php echo $article->getTitle(); ?>
+            </p>
+            <p class="p-0 m-0"> <?php echo $article->getText(); ?></p>
         </div>
-    <?php } ?>
+    </div>
 </div>
 
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>

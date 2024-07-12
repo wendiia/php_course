@@ -20,12 +20,7 @@ if (
     !empty($_POST['login']) &&
     !empty($_POST['password'])
 ) {
-    $checkAuth = $auth->checkLoginPassword($_POST['login'], $_POST['password']);
-
-    if (true === $checkAuth) {
-        $_SESSION['login'] = $_POST['login'];
-    }
-
+    $checkAuth = $auth->checkLoginPasswordAndAuth($_POST['login'], $_POST['password']);
     $view->assign('login', $_POST['login']);
     $view->assign('checkAuth', $checkAuth);
 }

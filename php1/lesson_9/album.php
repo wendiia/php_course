@@ -12,7 +12,7 @@ $auth = new Authentication();
 $albums = new Albums();
 $view = new View();
 $template = __DIR__ . '/templates/album.php';
-$album = $albums->getAlbumByValue('id', $_GET['id']);
+$album = $albums->getAlbumById($_GET['id']);
 
 if (null === $album) {
     http_response_code(404);

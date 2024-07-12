@@ -1,16 +1,16 @@
 <?php
 
 include __DIR__ . '/Article.php';
-include __DIR__ . '/DB.php';
+include __DIR__ . '/Db.php';
 
 class News
 {
-    protected DB $db;
+    protected Db $db;
     protected array $articles;
 
     public function __construct()
     {
-        $this->db = new DB();
+        $this->db = new Db();
         $sql = "SELECT * FROM news ORDER BY id DESC";
         $articlesParts = $this->db->query($sql);
 

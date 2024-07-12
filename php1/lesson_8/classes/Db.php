@@ -1,16 +1,17 @@
 <?php
 
-class DB
+class Db
 {
     protected string $pathConfig = __DIR__ . '/../data/config.txt';
-    protected string $dsn;
+    protected array $dsn;
     protected object $dbh;
     protected object $sth;
 
     public function __construct()
     {
-        $this->dsn = file_get_contents($this->pathConfig);
-        $this->dbh = new PDO($this->dsn, 'root', '');
+        $this->dsn = explode('   ', file_get_contents($this->pathConfig));
+        $password =  true === !empty($this->dsn[2])  ? '' : $this->dsn[2];
+        $this->dbh = new PDO($this->dsn[0], $this->dsn[1], $password);
     }
 
     public function execute(string $sql): bool

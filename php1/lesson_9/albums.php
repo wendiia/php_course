@@ -31,5 +31,5 @@ if (
 $template = __DIR__ . '/templates/albums.php';
 $view = new View();
 $view->assign('user', $auth->getCurrentUser());
-$view->assign('albums', $albums->getAllAlbums('date'));
+$view->assign('albums', $albums->getAllAlbums());
 $view->display($template);

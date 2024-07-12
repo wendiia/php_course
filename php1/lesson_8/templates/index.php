@@ -10,7 +10,6 @@
 <div class="container align-center">
     <section class="mb-4">
         <h3 class="text-center display-5 mb-4"> Новости </h3>
-
         <div class="row g-3 mb-5">
             <?php foreach ($articles as $article) { ?>
                 <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">

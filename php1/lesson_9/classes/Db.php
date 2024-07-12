@@ -4,16 +4,18 @@ namespace App;
 
 use PDO;
 
-class DB
+class Db
 {
-    protected string $dsn;
+    protected string $configPath = __DIR__ . '/../data/config.txt';
+    protected array $dsn;
     protected object $dbh;
     protected object $sth;
 
     public function __construct()
     {
-        $this->dsn = file_get_contents(__DIR__ . '/../data/config.txt');
-        $this->dbh = new PDO($this->dsn, 'root', '');
+        $this->dsn = explode('   ', file_get_contents($this->configPath));
+        $password =  true === empty($this->dsn[2])  ? '' : $this->dsn[2];
+        $this->dbh = new PDO($this->dsn[0], $this->dsn[1], $password);
     }
 
     public function execute(string $sql, array $data = null): bool

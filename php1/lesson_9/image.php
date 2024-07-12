@@ -13,7 +13,7 @@ $auth = new Authentication();
 $view = new View();
 $images = new Images();
 
-$image = $images->getImageValue('id', $_GET['id']);
+$image = $images->getImageById($_GET['id']);
 
 if (null === $image) {
     http_response_code(404);

@@ -1,1 +1,1 @@
-mysql:host=localhost;dbname=php1
+mysql:host=localhost;dbname=php1   root

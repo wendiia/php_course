@@ -40,4 +40,14 @@ class Authentication
 
         return false;
     }
+
+    public function checkLoginPasswordAndAuth(string $login, string $password): bool
+    {
+        if (true === $this->checkLoginPassword($login, $password)) {
+            $_SESSION['login'] = $_POST['login'];
+            return true;
+        }
+
+        return false;
+    }
 }

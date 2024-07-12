@@ -6,20 +6,15 @@ use App\Models\Image;
 
 class Images
 {
-    public function getAllImages(string $sortValue = null, string $typeSort = 'ASC'): ?array
+    public function getAllImages(): ?array
     {
-        $db = new DB();
+        $db = new Db();
         $sql = "SELECT * FROM images";
-
-        if (!empty($sortValue)) {
-            $sql = "SELECT * FROM images ORDER BY {$sortValue} {$typeSort}";
-        }
-
-        $imagesParts = $db->query($sql);
+        $images = $db->query($sql);
         $listImages = [];
 
-        if (!empty($imagesParts)) {
-            foreach ($imagesParts as $imageParts) {
+        if (!empty($images)) {
+            foreach ($images as $imageParts) {
                 $image = new Image($imageParts['url']);
                 $image->setId($imageParts['id']);
                 $listImages[$image->getId()] = $image;
@@ -30,11 +25,11 @@ class Images
         return null;
     }
 
-    public function getImageValue(string $name, string $value): ?Image
+    public function getImageById(int $id): ?Image
     {
-        $db = new DB();
-        $sql = "SELECT * FROM images WHERE $name = :value";
-        $res = $db->query($sql, ['value' => $value]);
+        $db = new Db();
+        $sql = "SELECT * FROM images WHERE id = :id";
+        $res = $db->query($sql, ['id' => $id]);
 
         if (!empty($res)) {
             $image = new Image($res[0]['url']);
@@ -51,7 +46,7 @@ class Images
         $uploaderImg = new UploaderImg($photoFieldName);
         $newImgName = $uploaderImg->upload($pathImg);
 
-        $db = new DB();
+        $db = new Db();
         $sql = "INSERT INTO images (url) VALUES (:url)";
         $data = ['url' => '/images/' . $newImgName];
         $res = $db->execute($sql, $data);

@@ -6,20 +6,15 @@ use App\Models\Album;
 
 class Albums
 {
-    public function getAllAlbums(string $sortValue = null, string $typeSort = 'ASC'): ?array
+    public function getAllAlbums(): ?array
     {
-        $db = new DB();
+        $db = new Db();
         $sql = "SELECT * FROM albums";
-
-        if (!empty($sortValue)) {
-            $sql = "SELECT * FROM albums ORDER BY {$sortValue} {$typeSort}";
-        }
-
-        $albumsParts = $db->query($sql);
+        $albums = $db->query($sql);
         $listAlbums = [];
 
-        if (!empty($albumsParts)) {
-            foreach ($albumsParts as $albumParts) {
+        if (!empty($albums)) {
+            foreach ($albums as $albumParts) {
                 $album = new Album(
                     $albumParts['title'],
                     $albumParts['description'],
@@ -35,11 +30,11 @@ class Albums
         return null;
     }
 
-    public function getAlbumByValue(string $name, string $value): ?Album
+    public function getAlbumById(int $id): ?Album
     {
-        $db = new DB();
-        $sql = "SELECT * FROM albums WHERE $name = :value";
-        $res = $db->query($sql, ['value' => $value]);
+        $db = new Db();
+        $sql = "SELECT * FROM albums WHERE id = :id";
+        $res = $db->query($sql, ['id' => $id]);
 
         if (!empty($res)) {
             $album = new Album(
@@ -60,7 +55,7 @@ class Albums
         $pathImg = __DIR__ . '/../images/';
         $uploaderImg = new UploaderImg($photoFieldName);
         $newImgName = $uploaderImg->upload($pathImg);
-        $db = new DB();
+        $db = new Db();
         $sql = "INSERT INTO albums (title, description, date, photo) VALUES (:title, :description, :date, :photo)";
         $data = [
             'title' => $album->getTitle(),
