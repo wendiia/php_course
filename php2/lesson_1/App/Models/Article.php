@@ -8,11 +8,10 @@ use App\Model;
 class Article extends Model
 {
     protected static string $table = 'news';
-
     public string $title;
     public string $lead;
 
-    public static function findThreeLastNews() : array | false
+    public static function findThreeLastNews(): array | false
     {
         $sql = "SELECT * FROM " . self::$table . " ORDER BY id DESC LIMIT 3";
         $db = new Db();

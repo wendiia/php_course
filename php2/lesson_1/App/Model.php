@@ -2,27 +2,25 @@
 
 namespace App;
 
-use App\Models\Article;
-
 abstract class Model
 {
     protected ?int $id = null;
     protected static string $table = '';
     public static function findAll(): array | false
     {
-        $sql = "SELECT * FROM " . static::$table;
         $db = new Db();
+        $sql = "SELECT * FROM " . static::$table;
 
         return $db->query($sql, [], static::class);
     }
 
-    public static function findById(int $id): Article | false
+    public static function findById(int $id): object | false
     {
-        $sql = "SELECT * FROM " . static::$table . " WHERE id = :id";
         $db = new Db();
-        $article = $db->query($sql, ['id' => $id], static::class);
+        $sql = "SELECT * FROM " . static::$table . " WHERE id = :id";
+        $record = $db->query($sql, ['id' => $id], static::class);
 
-        return !empty($article) ? $article[0] : false;
+        return !empty($record) ? $record[0] : false;
     }
 
     public function getId(): ?int

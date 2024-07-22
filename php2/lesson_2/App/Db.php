@@ -9,13 +9,26 @@ class Db
 
     public function __construct()
     {
-        $this->dbh = new \PDO('mysql:host=localhost;dbname=php2', 'root', '');
+        $config = Config::init();
+        $dsn = "{$config->data['db']['db']}:
+                host={$config->data['db']['host']};
+                dbname={$config->data['db']['dbname']}";
+        $this->dbh = new \PDO(
+            $dsn,
+            $config->data['db']['login'],
+            $config->data['db']['password']
+        );
     }
 
     public function execute(string $sql, array $params = []): bool
     {
         $this->sth = $this->dbh->prepare($sql);
         return $this->sth->execute($params);
+    }
+
+    public function getLastInsertId(): int
+    {
+        return $this->dbh->lastInsertId();
     }
 
     public function query(string $sql, array $params = [], $class = \stdClass::class): array|false
