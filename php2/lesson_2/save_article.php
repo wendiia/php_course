@@ -5,11 +5,10 @@ require __DIR__ . '/autoload.php';
 use App\Models\Article;
 
 if (
-    !empty($_GET['id']) &&
     !empty($_POST['title']) &&
     !empty($_POST['lead'])
 ) {
-    $article = Article::findById($_GET['id']);
+    $article = !empty($_POST['id']) ? Article::findById($_GET['id']) : new Article();
     $article->title = $_POST['title'];
     $article->lead = $_POST['lead'];
     $article->save();

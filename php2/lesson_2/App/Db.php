@@ -2,10 +2,11 @@
 
 namespace App;
 
+use PDO;
+
 class Db
 {
     protected object $dbh;
-    protected object $sth;
 
     public function __construct()
     {
@@ -13,7 +14,7 @@ class Db
         $dsn = "{$config->data['db']['db']}:
                 host={$config->data['db']['host']};
                 dbname={$config->data['db']['dbname']}";
-        $this->dbh = new \PDO(
+        $this->dbh = new PDO(
             $dsn,
             $config->data['db']['login'],
             $config->data['db']['password']
@@ -22,8 +23,8 @@ class Db
 
     public function execute(string $sql, array $params = []): bool
     {
-        $this->sth = $this->dbh->prepare($sql);
-        return $this->sth->execute($params);
+        $sth = $this->dbh->prepare($sql);
+        return $sth->execute($params);
     }
 
     public function getLastInsertId(): int
@@ -33,14 +34,13 @@ class Db
 
     public function query(string $sql, array $params = [], $class = \stdClass::class): array|false
     {
-        $this->sth = $this->dbh->prepare($sql);
-        $res = $this->sth->execute($params);
+        $sth = $this->dbh->prepare($sql);
+        $res = $sth->execute($params);
 
         if (false === $res) {
             return false;
         }
 
-        $data = $this->sth->fetchAll(\PDO::FETCH_CLASS, $class);
-        return empty($data) ? false : $data;
+        return $sth->fetchAll(PDO::FETCH_CLASS, $class);
     }
 }

@@ -15,7 +15,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Изменить новость</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/update_article.php?id=<?php echo $article->getId();?>" method="post">
+            <form action="/save_article.php?id=<?php echo $article->getId();?>" method="post">
                 <div class="modal-body">
                     <label for="title"> Название: </label>
                     <input class="form-control" id="title"

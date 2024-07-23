@@ -23,7 +23,7 @@
             <?php } ?>
         </div>
 
-        <form action="/upload_article.php" method="post">
+        <form action="/save_article.php" method="post">
             <label for="title"> Название: </label>
             <input class="form-control" id="title" name="title" type="text">
 
