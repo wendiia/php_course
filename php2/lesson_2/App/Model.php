@@ -12,7 +12,7 @@ abstract class Model
         return $this->id;
     }
 
-    public static function findAll(): array|false
+    public static function findAll(): array | false
     {
         $sql = "SELECT * FROM " . static::$table;
         $db = new Db();

@@ -3,6 +3,7 @@
 namespace App;
 
 use PDO;
+use stdClass;
 
 class Db
 {
@@ -32,7 +33,7 @@ class Db
         return $this->dbh->lastInsertId();
     }
 
-    public function query(string $sql, array $params = [], $class = \stdClass::class): array|false
+    public function query(string $sql, array $params = [], $class = stdClass::class): array|false
     {
         $sth = $this->dbh->prepare($sql);
         $res = $sth->execute($params);
