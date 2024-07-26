@@ -12,7 +12,7 @@ class Config
         $this->data = require __DIR__ . '/../data/config.php';
     }
 
-    public static function getInstance(): Config
+    public static function init(): Config
     {
         if (!isset(self::$objConfig)) {
             self::$objConfig = new Config();

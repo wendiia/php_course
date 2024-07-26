@@ -15,7 +15,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Изменить новость</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/admin/update_or_insert_article.php?id=<?php echo $article->getId();?>" method="post">
+            <form action="/save_article.php?id=<?php echo $article->getId();?>" method="post">
                 <div class="modal-body">
                     <label for="title"> Название: </label>
                     <input class="form-control" id="title"
@@ -50,7 +50,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Изменить
     </button>
-    <a href="/admin/delete_article.php?id=<?php echo $article->getId(); ?>" class="btn btn-danger" role="button">Удалить</a>
+    <a href="/delete_article.php?id=<?php echo $article->getId(); ?>" class="btn btn-danger" role="button">Удалить</a>
 </div>
 
 <script src="https://kit.fontawesome.com/5aa26e8b69.js" crossorigin="anonymous"></script>
