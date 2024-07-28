@@ -1,38 +1,47 @@
 <?php
 
 namespace App;
+use Countable;
 
-class View
+/**
+ * @property $news
+ */
+
+class View implements Countable
 {
-    protected string $template;
     protected array $data;
 
-    public function __construct($template)
+    public function __set($key, $value): void
     {
-        $this->template = $template;
+        $this->data[$key] = $value;
     }
 
-    public function assign($name, $value): void
+    public function __get($key)
     {
-        $this->data[$name] = $value;
+        return $this->data[$key];
     }
 
-    public function display(): void
+    public function display($template): void
     {
-        echo $this->render();
+        echo $this->render($template);
     }
 
-    public function render(): false|string
+    public function render($template): false|string
     {
         ob_start();
         foreach ($this->data as $key => $value) {
             $$key = $value;
         }
-        require $this->template;
+        require $template;
 
         $result = ob_get_contents();
         ob_clean();
 
         return $result;
+    }
+
+    public function count(): int
+    {
+        return count($this->data);
     }
 }
