@@ -28,6 +28,10 @@ class Article extends Model
 
     public function __isset(string $name): bool
     {
-        return 'author' === $name && !empty($this->author_id);
+        if ('author' === $name) {
+            return isset($this->author_id);
+        }
+
+        return isset($this->$name);
     }
 }

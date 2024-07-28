@@ -16,4 +16,7 @@ if (false === $article) {
 
 $view = new View();
 $view->article = $article;
-$view->display($template);
+echo isset($view->article->author);
+
+
+//$view->display($template);
