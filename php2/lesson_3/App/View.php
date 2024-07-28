@@ -1,25 +1,20 @@
 <?php
 
 namespace App;
+
 use Countable;
+use Iterator;
+use App\Traits\PropertyStorageTrait;
 
 /**
+ * @property $data
  * @property $news
+ * @property $article
  */
 
-class View implements Countable
+class View implements Countable, Iterator
 {
-    protected array $data;
-
-    public function __set($key, $value): void
-    {
-        $this->data[$key] = $value;
-    }
-
-    public function __get($key)
-    {
-        return $this->data[$key];
-    }
+    use PropertyStorageTrait;
 
     public function display($template): void
     {
@@ -43,5 +38,30 @@ class View implements Countable
     public function count(): int
     {
         return count($this->data);
+    }
+
+    public function current(): mixed
+    {
+        return current($this->data);
+    }
+
+    public function next(): void
+    {
+        next($this->data);
+    }
+
+    public function key(): mixed
+    {
+        return key($this->data);
+    }
+
+    public function valid(): bool
+    {
+        return null !== key($this->data);
+    }
+
+    public function rewind(): void
+    {
+        reset($this->data);
     }
 }

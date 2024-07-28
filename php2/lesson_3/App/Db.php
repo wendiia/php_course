@@ -11,7 +11,7 @@ class Db
 
     public function __construct()
     {
-        $config = Config::init();
+        $config = Config::getInstance();
         $dsn = "{$config->data['db']['db']}:
                 host={$config->data['db']['host']};
                 dbname={$config->data['db']['dbname']}";

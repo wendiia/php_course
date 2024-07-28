@@ -12,3 +12,16 @@ VALUES
     ('Новость 2', 'Тут описание для новости 2'),
     ('Новость 3', 'Тут описание для новости 3'),
     ('Новость 4', 'Тут описание для новости 4');
+
+CREATE TABLE authors
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(1024) NOT NULL,
+);
+
+INSERT INTO authors (name)
+VALUES
+    ('Автор 1'),
+    ('Автор 2'),
+    ('Автор 3'),
+    ('Автор 4');

@@ -6,7 +6,6 @@ use App\Models\Article;
 use App\View;
 
 $template = __DIR__ . '/templates/index.php';
-$news = Article::findAll();
 $view = new View();
-$view->news = $news;
+$view->news = Article::findAll();
 $view->display($template);
