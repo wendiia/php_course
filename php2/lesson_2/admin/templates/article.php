@@ -35,7 +35,7 @@
 
 <div class="container align-center">
     <h3 class="display-3 text-center mb-5"> Статья </h3>
-    <a href="../index.php" class="fs-5 mb-5"> Назад </a>
+    <a href="/admin/index.php" class="fs-5 mb-5"> Назад </a>
     <div class="row g-3 mb-5">
         <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
             <p class="fs-5">

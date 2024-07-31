@@ -16,5 +16,5 @@ if (!empty($_GET['id'])) {
     $article->delete();
 }
 
-header('Location: /index.php');
+header('Location: /admin/');
 exit();

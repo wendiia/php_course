@@ -14,5 +14,5 @@ if (
     $article->save();
 }
 
-header('Location: /index.php');
+header('Location: /admin/');
 exit();

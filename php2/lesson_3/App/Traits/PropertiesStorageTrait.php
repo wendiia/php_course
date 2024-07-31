@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait PropertyStorageTrait
+trait PropertiesStorageTrait
 {
     protected array $data;
 
