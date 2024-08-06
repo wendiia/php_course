@@ -1,9 +1,10 @@
-
 CREATE TABLE news
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    author_id INT,
     title VARCHAR(1024) NOT NULL,
-    lead TEXT NOT NULL
+    lead TEXT NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES authors (id)
 );
 
 INSERT INTO news (title, lead)
@@ -16,7 +17,7 @@ VALUES
 CREATE TABLE authors
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(1024) NOT NULL,
+    name VARCHAR(1024) NOT NULL
 );
 
 INSERT INTO authors (name)
@@ -25,3 +26,18 @@ VALUES
     ('Автор 2'),
     ('Автор 3'),
     ('Автор 4');
+
+
+CREATE TABLE users
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(1024) NOT NULL,
+    password VARCHAR(1024) NOT NULL
+);
+
+
+INSERT INTO users (login, password)
+VALUES
+    ('tata', '$2y$10$Yu45d/AYYVHpWWrIA7HDAOqDOGFo9ARxqVwwxDwB0I4LBFWEwa3cy'),
+    ('tutu', '$2y$10$kfAkyMaZDHq0Hk6O4T9ORubxypmeRFOjENOh0U7UKehSAH82ck/h.'),
+    ('titi' '$2y$10$Z.iEd501F2mZ89MLwj2BwO.eX.R7M78g1ATV9ucQg0wv2iYTUemBm');

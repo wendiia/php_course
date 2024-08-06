@@ -20,7 +20,7 @@ abstract class Model
         return $db->query($sql, [], static::class);
     }
 
-    public static function findById(int $id): object | false
+    public static function findById(int $id): object|false
     {
         $sql = "SELECT * FROM " . static::$table . " WHERE id = :id";
         $db = new Db();

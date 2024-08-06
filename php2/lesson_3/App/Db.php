@@ -12,9 +12,9 @@ class Db
     public function __construct()
     {
         $config = Config::getInstance();
-        $dsn = "{$config->data['db']['db']}:
-                host={$config->data['db']['host']};
-                dbname={$config->data['db']['dbname']}";
+        $dsn = $config->data['db']['db'] .
+            ':host=' . $config->data['db']['host'] .
+            ';dbname=' . $config->data['db']['dbname'];
         $this->dbh = new PDO(
             $dsn,
             $config->data['db']['login'],

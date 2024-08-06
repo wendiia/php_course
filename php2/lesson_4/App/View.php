@@ -24,9 +24,13 @@ class View implements Countable, Iterator
     public function render($template): false|string
     {
         ob_start();
-        foreach ($this->data as $key => $value) {
-            $$key = $value;
+
+        if (isset($this->data)) {
+            foreach ($this->data as $key => $value) {
+                $$key = $value;
+            }
         }
+
         require $template;
 
         $result = ob_get_contents();

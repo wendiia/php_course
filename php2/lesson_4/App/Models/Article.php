@@ -15,7 +15,7 @@ class Article extends Model
     public string $title;
     public string $lead;
 
-    public function __get($key): object|null
+    public function __get($key): ?object
     {
         if (isset($this->$key)) {
             $db = new Db();
