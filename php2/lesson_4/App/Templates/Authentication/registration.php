@@ -27,8 +27,8 @@
                 <input class="form-control" id="confirm_password" name="confirm_password" type="password">
             </div>
 
-            <?php if (!empty($registerFail)) { ?>
-                <p class="text-danger"> <?php echo $registerFail;?> </p>
+            <?php if (!empty($authFail)) { ?>
+                <p class="text-danger"> <?php echo $authFail;?> </p>
             <?php } ?>
 
             <button type="submit" class="btn btn-primary"> Подтвердить </button>

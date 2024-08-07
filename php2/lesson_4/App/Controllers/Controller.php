@@ -11,6 +11,10 @@ abstract class Controller
     public function __construct()
     {
         $this->view = new View();
+
+        if (!empty($_SESSION['login'])) {
+            $this->view->login = $_SESSION['login'];
+        }
     }
 
     public function action($name): void

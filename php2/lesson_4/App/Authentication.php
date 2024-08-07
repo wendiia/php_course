@@ -16,7 +16,7 @@ class Authentication
         ) {
             $user = new User();
             $user->login = $login;
-            $user->password = password_hash($password, PASSWORD_DEFAULT) ;
+            $user->password = password_hash($password, PASSWORD_DEFAULT);
             return $user->save();
         }
 

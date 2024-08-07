@@ -10,6 +10,8 @@ use App\Traits\PropertiesStorageTrait;
  * @property $data
  * @property $news
  * @property $article
+ * @property $login
+ * @property $authFail
  */
 
 class View implements Countable, Iterator

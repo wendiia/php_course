@@ -3,9 +3,9 @@
         <li class="me-5"><a href="/"> Новости </a></li>
 
         <?php
-        if (!empty($_SESSION['login'])) { ?>
+        if (!empty($login)) { ?>
             <li class="me-5 fs-6 text-success fw-bold">
-                <p><?php echo $_SESSION['login'];?></p>
+                <p><?php echo $login;?></p>
             </li>
 
             <li class="me-5"><a href="/auth/LogoutUser"> Выйти </a></li>
