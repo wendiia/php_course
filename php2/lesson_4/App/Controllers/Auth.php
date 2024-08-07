@@ -8,7 +8,7 @@ class Auth extends Controller
 {
     protected function actionLogin(): void
     {
-        $this->view->display(__DIR__ . '/../Templates/Authentication/Login.php');
+        $this->view->display(__DIR__ . '/../Templates/Authentication/login.php');
     }
 
     protected function actionRegister(): void

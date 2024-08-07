@@ -7,12 +7,12 @@ CREATE TABLE news
     FOREIGN KEY (author_id) REFERENCES authors (id)
 );
 
-INSERT INTO news (title, lead)
+INSERT INTO news (author_id, title, lead)
 VALUES
-    ('Новость 1', 'Тут описание для новости 1'),
-    ('Новость 2', 'Тут описание для новости 2'),
-    ('Новость 3', 'Тут описание для новости 3'),
-    ('Новость 4', 'Тут описание для новости 4');
+    (1, 'Новость 1', 'Тут описание для новости 1'),
+    (4, 'Новость 2', 'Тут описание для новости 2'),
+    (2, 'Новость 3', 'Тут описание для новости 3'),
+    (4, 'Новость 4', 'Тут описание для новости 4');
 
 CREATE TABLE authors
 (
@@ -40,4 +40,4 @@ INSERT INTO users (login, password)
 VALUES
     ('tata', '$2y$10$Yu45d/AYYVHpWWrIA7HDAOqDOGFo9ARxqVwwxDwB0I4LBFWEwa3cy'),
     ('tutu', '$2y$10$kfAkyMaZDHq0Hk6O4T9ORubxypmeRFOjENOh0U7UKehSAH82ck/h.'),
-    ('titi' '$2y$10$Z.iEd501F2mZ89MLwj2BwO.eX.R7M78g1ATV9ucQg0wv2iYTUemBm');
+    ('titi', '$2y$10$Z.iEd501F2mZ89MLwj2BwO.eX.R7M78g1ATV9ucQg0wv2iYTUemBm');

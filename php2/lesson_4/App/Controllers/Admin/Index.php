@@ -2,11 +2,21 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\AdminController;
+use App\Authentication;
+use App\Controllers\Controller;
 use App\Models\Article;
 
-class Index extends AdminController
+class Index extends Controller
 {
+    protected function access(): bool
+    {
+        if (null !== Authentication::getCurrentUser()) {
+            return true;
+        }
+
+        return false;
+    }
+
     protected function actionAll(): void
     {
         $this->view->news = Article::findAll();
