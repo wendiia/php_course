@@ -5,8 +5,8 @@ session_start();
 require __DIR__ . '/autoload.php';
 
 use App\Albums;
+use App\Services\Authentication;
 use App\View;
-use App\Authentication;
 
 $auth = new Authentication();
 $albums = new Albums();

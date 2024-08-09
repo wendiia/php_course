@@ -2,9 +2,9 @@
 
 namespace App\Controllers\Admin;
 
-use App\Authentication;
 use App\Controllers\Controller;
 use App\Models\Article;
+use App\Services\Authentication;
 
 class Index extends Controller
 {

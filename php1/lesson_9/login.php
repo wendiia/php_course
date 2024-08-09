@@ -4,8 +4,8 @@ session_start();
 
 require __DIR__ . '/autoload.php';
 
+use App\Services\Authentication;
 use App\View;
-use App\Authentication;
 
 if (!empty($_SESSION['login'])) {
     header('Location: /gallery.php');

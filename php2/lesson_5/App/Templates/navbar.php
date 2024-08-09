@@ -1,0 +1,20 @@
+<nav class="mt-3">
+    <ul class="d-flex">
+        <li class="me-5"><a href="/"> Новости </a></li>
+
+        <?php
+        if (!empty($login)) { ?>
+            <li class="me-5 fs-6 text-success fw-bold">
+                <p><?php echo $login;?></p>
+            </li>
+
+            <li class="me-5"><a href="/user/LogoutUser"> Выйти </a></li>
+            <?php
+        } else { ?>
+            <li class="me-5"><a href="/user/login"> Войти </a></li>
+            <li class="me-5"><a href="/user/register"> Регистрация </a></li>
+            <?php
+        } ?>
+
+    </ul>
+</nav>

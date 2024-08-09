@@ -5,8 +5,8 @@ session_start();
 require __DIR__ . '/autoload.php';
 
 use App\Images;
+use App\Services\Authentication;
 use App\View;
-use App\Authentication;
 
 $template = __DIR__ . '/templates/image.php';
 $auth = new Authentication();

@@ -6,8 +6,8 @@ require __DIR__ . '/autoload.php';
 
 use App\Images;
 use App\Models\Image;
+use App\Services\Authentication;
 use App\View;
-use App\Authentication;
 
 $template = __DIR__ . '/templates/gallery.php';
 $images = new Images();
