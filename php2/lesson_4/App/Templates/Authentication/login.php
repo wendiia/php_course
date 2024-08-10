@@ -15,7 +15,7 @@
     <section class="mb-4 w-50 ">
         <h3 class="text-center display-5 mb-4"> Войти </h3>
 
-        <form action="/auth/LoginUser" method="post">
+        <form action="/user/LoginUser" method="post">
             <div class="modal-body mb-3">
                 <label for="login"> Логин: </label>
                 <input class="form-control" id="login" name="login" type="text">

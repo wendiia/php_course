@@ -8,11 +8,11 @@
                 <p><?php echo $login;?></p>
             </li>
 
-            <li class="me-5"><a href="/auth/LogoutUser"> Выйти </a></li>
+            <li class="me-5"><a href="/user/LogoutUser"> Выйти </a></li>
             <?php
         } else { ?>
-            <li class="me-5"><a href="/auth/login"> Войти </a></li>
-            <li class="me-5"><a href="/auth/register"> Регистрация </a></li>
+            <li class="me-5"><a href="/user/login"> Войти </a></li>
+            <li class="me-5"><a href="/user/register"> Регистрация </a></li>
             <?php
         } ?>
 

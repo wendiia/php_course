@@ -2,31 +2,27 @@
 
 use App\Exceptions\Http403Exception;
 use App\Exceptions\Http404Exception;
-use \App\Exceptions\DbException;
+use App\Exceptions\DbException;
 use App\View;
 
 require __DIR__ . '/autoload.php';
 
 session_start();
 
-$classNamePart = 'App\\Controllers\\';
-$url = substr($_SERVER['REQUEST_URI'], 1);
-$checkAdmin = str_contains($url, 'admin');
-
-if (true === $checkAdmin) {
-    $url = substr($url, 6);
-    $classNamePart .= 'Admin\\';
-}
-
-$urlWithoutGet = parse_url($url, PHP_URL_PATH);
-$urlParts = explode('/', $urlWithoutGet);
-$lastUrlPart = array_pop($urlParts);
-$urlWithoutAct = implode('\\', $urlParts);
-$act = $lastUrlPart ?: 'All';
-$controller = $urlWithoutAct ?: 'Index';
-$class = $classNamePart . $controller;
-
 $view = new View();
+$act = 'All';
+$class = 'App\\Controllers\\Index';
+
+$urlWithoutGet = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$urlOnlyText = str_replace('/', '', $urlWithoutGet);
+
+if ('admin' === $urlOnlyText) {
+    $class = 'App\\Controllers\\Admin\\Index';
+} elseif (!empty($urlOnlyText)) {
+    $urlParts = explode('/', $urlWithoutGet);
+    $act = array_pop($urlParts);
+    $class = 'App\\Controllers' . implode('\\', $urlParts);
+}
 
 try {
     $ctrl = new $class();

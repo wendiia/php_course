@@ -14,7 +14,7 @@ class RegistrationValidate
     /**
      * @throws AuthErrors
      */
-    public function validate(string $login, string $password, ?string $confirmPassword=null): void
+    public function validate(string $login, string $password, ?string $confirmPassword = null): void
     {
         $this->errors = new AuthErrors();
         $this->checkLogin($login);
@@ -37,9 +37,10 @@ class RegistrationValidate
             if (!empty(User::findByLogin($login))) {
                 $this->errors->addError('login', new RegistrationException('Такой логин уже существует'));
             }
-        } else {
-            $this->errors->addError('login', new RegistrationException('Заполните поле "Логин"'));
+            return;
         }
+
+        $this->errors->addError('login', new RegistrationException('Заполните поле "Логин"'));
     }
 
     protected function checkPassword(string $password, ?string $confirmPassword): void
@@ -54,8 +55,9 @@ class RegistrationValidate
             if ($password !== $confirmPassword && !empty($confirmPassword)) {
                 $this->errors->addError('password', new RegistrationException('Пароли не совпадают'));
             }
-        } else {
-            $this->errors->addError('password', new RegistrationException('Заполните поле "Пароль"'));
+            return;
         }
+
+        $this->errors->addError('password', new RegistrationException('Заполните поле "Пароль"'));
     }
 }

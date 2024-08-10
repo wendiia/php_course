@@ -15,12 +15,14 @@ class Article extends Model
     public string $title;
     public string $lead;
 
-    public function __get($key): ?object
+    public function __get(string $key): mixed
     {
-        if (isset($this->$key)) {
+        if ('author' === $key) {
             $db = new Db();
             $sql = "SELECT * FROM authors WHERE id = :id";
             return $db->query($sql, ['id' => $this->author_id], Author::class)[0];
+        } elseif (isset($key)) {
+            return $this->$key;
         }
 
         return null;
@@ -28,10 +30,6 @@ class Article extends Model
 
     public function __isset(string $name): bool
     {
-        if ('author' === $name) {
-            return isset($this->author_id);
-        }
-
         return isset($this->$name);
     }
 }

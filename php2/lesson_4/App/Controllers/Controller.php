@@ -17,7 +17,7 @@ abstract class Controller
         }
     }
 
-    public function action($name): void
+    public function action(string $name): void
     {
         if ($this->access()) {
             $actionName = 'action' . $name;

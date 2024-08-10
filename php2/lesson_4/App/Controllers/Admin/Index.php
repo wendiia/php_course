@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
 use App\Models\Article;
-use App\Services\Authentication;
+use App\Authentication;
 
 class Index extends Controller
 {

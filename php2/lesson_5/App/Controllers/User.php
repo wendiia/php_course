@@ -47,7 +47,7 @@ class User extends Controller
     {
         try {
             Authentication::login($_POST['login'], $_POST['password']);
-            header('Location: /');
+            header('Location: /admin');
         } catch (LoginException $e) {
             $this->view->authFail = $e->getMessage();
             $this->actionLogin();

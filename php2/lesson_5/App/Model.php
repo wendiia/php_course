@@ -21,9 +21,11 @@ abstract class Model
      */
     public function fill(array $data): void
     {
-        $class = 'App\\Services\\Validation\\' . (new \ReflectionClass($this))->getShortName() . 'Validate';
+        $modelNameParts = explode('\\', static::class);
+        $modelName = end($modelNameParts);
+        $class = 'App\\Services\\Validation\\' . $modelName . 'Validate';
         $validator = new $class();
-        $validator->validate(...$data);
+        $validator->validate($data);
 
         foreach ($data as $key => $value) {
             $this->$key = $value;
@@ -35,7 +37,7 @@ abstract class Model
      */
     public static function findAll(): array|false
     {
-        $sql = "SELECT * FROM " . static::$table;
+        $sql = 'SELECT * FROM ' . static::$table;
         $db = new Db();
 
         return $db->query($sql, [], static::class);
@@ -46,7 +48,7 @@ abstract class Model
      */
     public static function findById(int $id): object|false
     {
-        $sql = "SELECT * FROM " . static::$table . " WHERE id = :id";
+        $sql = 'SELECT * FROM ' . static::$table . " WHERE id = :id";
         $db = new Db();
         $record = $db->query($sql, ['id' => $id], static::class);
 
@@ -73,7 +75,7 @@ abstract class Model
                 $sets[] = $name . "=:" . $name;
             }
         }
-        $sql = "UPDATE " . static::$table . " SET " .
+        $sql = 'UPDATE ' . static::$table . ' SET ' .
             implode(', ', $sets) .
             " WHERE id=:id";
 
@@ -99,9 +101,9 @@ abstract class Model
             }
         }
 
-        $sql = "INSERT INTO " . static::$table .
-            " (" . implode(', ', $keys) . ")
-            VALUES (" . implode(', ', $sets) . ")";
+        $sql = 'INSERT INTO ' . static::$table .
+            ' (' . implode(', ', $keys) . ')
+            VALUES (' . implode(', ', $sets) . ')';
 
         $res = $db->execute($sql, $data);
 
@@ -131,7 +133,7 @@ abstract class Model
     public function delete(): bool
     {
         $db = new Db();
-        $sql = "DELETE FROM " . static::$table . " WHERE id=:id";
+        $sql = 'DELETE FROM ' . static::$table . " WHERE id=:id";
         return $db->execute($sql, ['id' => $this->id]);
     }
 }

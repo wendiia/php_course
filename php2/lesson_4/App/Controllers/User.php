@@ -2,18 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Services\Authentication;
+use App\Authentication;
 
-class Auth extends Controller
+class User extends Controller
 {
     protected function actionLogin(): void
     {
         $this->view->display(__DIR__ . '/../Templates/Authentication/login.php');
+        exit();
     }
 
     protected function actionRegister(): void
     {
         $this->view->display(__DIR__ . '/../Templates/Authentication/registration.php');
+        exit();
     }
 
     protected function actionLoginUser(): void
@@ -21,7 +23,6 @@ class Auth extends Controller
         if (false === Authentication::login($_POST['login'], $_POST['password'])) {
             $this->view->authFail = 'Неверный логин или пароль';
             $this->actionLogin();
-            exit();
         }
 
         header('Location: /');
@@ -30,15 +31,17 @@ class Auth extends Controller
 
     protected function actionRegisterUser(): void
     {
-        $resultRegistration = Authentication::register($_POST['login'], $_POST['password'], $_POST['confirm_password']);
+        $resultRegistration = Authentication::register(
+            $_POST['login'],
+            $_POST['password'],
+            $_POST['confirm_password']
+        );
 
         if (false === $resultRegistration) {
             $this->view->authFail = 'Данные введены неверно!';
             $this->actionRegister();
-            exit();
         }
 
-        Authentication::login($_POST['login'], $_POST['password']);
         header('Location: /');
         exit();
     }

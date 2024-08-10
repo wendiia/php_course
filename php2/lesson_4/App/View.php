@@ -18,12 +18,12 @@ class View implements Countable, Iterator
 {
     use PropertiesStorageTrait;
 
-    public function display($template): void
+    public function display(string $template): void
     {
         echo $this->render($template);
     }
 
-    public function render($template): false|string
+    public function render(string $template): false|string
     {
         ob_start();
 

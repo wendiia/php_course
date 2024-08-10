@@ -1,25 +1,24 @@
 <?php
 
+use App\View;
+
 require __DIR__ . '/autoload.php';
 
 session_start();
 
-$classNamePart = 'App\\Controllers\\';
-$url = substr($_SERVER['REQUEST_URI'], 1);
-$checkAdmin = str_contains($url, 'admin');
+$view = new View();
+$act = 'All';
+$class = 'App\\Controllers\\Index';
+$urlWithoutGet = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$urlOnlyText = str_replace('/', '', $urlWithoutGet);
 
-if (true === $checkAdmin) {
-    $url = substr($url, 6);
-    $classNamePart .= 'Admin\\';
+if ('admin' === $urlOnlyText) {
+    $class = 'App\\Controllers\\Admin\\Index';
+} elseif (!empty($urlOnlyText)) {
+    $urlParts = explode('/', $urlWithoutGet);
+    $act = array_pop($urlParts);
+    $class = 'App\\Controllers' . implode('\\', $urlParts);
 }
-
-$urlWithoutGet = parse_url($url, PHP_URL_PATH);
-$urlParts = explode('/', $urlWithoutGet);
-$lastUrlPart = array_pop($urlParts);
-$urlWithoutAct = implode('\\', $urlParts);
-$act = $lastUrlPart ?: 'All';
-$controller = $urlWithoutAct ?: 'Index';
-$class = $classNamePart . $controller;
 
 $ctrl = new $class();
 $ctrl->action($act);

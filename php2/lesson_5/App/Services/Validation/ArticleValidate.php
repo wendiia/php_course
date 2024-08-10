@@ -11,13 +11,18 @@ class ArticleValidate
 
     /**
      * @throws ModelErrors
+     * @throws ModelException
      */
-    public function validate(string $title, string $lead): void
+    public function validate(array $data): void
     {
         $this->errors = new ModelErrors();
 
-        $this->checkTitle($title);
-        $this->checkLead($lead);
+        try {
+            $this->checkTitle($data['title']);
+            $this->checkLead($data['lead']);
+        } catch (\TypeError  $e) {
+            throw new ModelException('Таких свойств модели не существует!');
+        }
 
         if (!empty($this->errors->getErrors())) {
             throw $this->errors;
@@ -39,12 +44,10 @@ class ArticleValidate
                     new ModelException('Название не должно иметь символ "!"')
                 );
             }
-        } else {
-            $this->errors->addError(
-                'title',
-                new ModelException('Название статьи не может быть пустым')
-            );
+            return;
         }
+
+        $this->errors->addError('title', new ModelException('Название статьи не может быть пустым'));
     }
 
     protected function checkLead(string $lead): void
@@ -62,11 +65,9 @@ class ArticleValidate
                     new ModelException('Описание не должно иметь символ "*"')
                 );
             }
-        } else {
-            $this->errors->addError(
-                'lead',
-                new ModelException('Описание не может быть пустым')
-            );
+            return;
         }
+
+        $this->errors->addError('lead', new ModelException('Описание статьи не может быть пустым'));
     }
 }
