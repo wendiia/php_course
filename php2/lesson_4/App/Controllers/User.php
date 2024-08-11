@@ -9,24 +9,22 @@ class User extends Controller
     protected function actionLogin(): void
     {
         $this->view->display(__DIR__ . '/../Templates/Authentication/login.php');
-        exit();
     }
 
     protected function actionRegister(): void
     {
         $this->view->display(__DIR__ . '/../Templates/Authentication/registration.php');
-        exit();
     }
 
     protected function actionLoginUser(): void
     {
         if (false === Authentication::login($_POST['login'], $_POST['password'])) {
-            $this->view->authFail = 'Неверный логин или пароль';
+            $this->view->authFail = false;
             $this->actionLogin();
+            return;
         }
 
         header('Location: /');
-        exit();
     }
 
     protected function actionRegisterUser(): void
@@ -38,18 +36,17 @@ class User extends Controller
         );
 
         if (false === $resultRegistration) {
-            $this->view->authFail = 'Данные введены неверно!';
+            $this->view->authFail = false;
             $this->actionRegister();
+            return;
         }
 
         header('Location: /');
-        exit();
     }
 
     protected function actionLogoutUser(): void
     {
         Authentication::logout();
         header('Location: /');
-        exit();
     }
 }

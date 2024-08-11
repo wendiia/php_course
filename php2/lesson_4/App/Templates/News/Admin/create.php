@@ -19,7 +19,7 @@
                 <textarea class="form-control" id="lead" name="lead" type="text"></textarea>
             </div>
 
-            <a href="/admin" class="btn btn-primary"> Назад</a>
+            <a href="/admin/index/all" class="btn btn-primary"> Назад</a>
             <button type="submit" class="btn btn-success"> Сохранить</button>
         </form>
     </section>

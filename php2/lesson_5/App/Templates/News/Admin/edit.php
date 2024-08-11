@@ -9,7 +9,7 @@
 
 <div class="container align-center">
     <section class="mb-4">
-        <h3 class="text-center display-5 mb-4"> Редактироване новости <?php echo $article->getId() ?? ''; ?> </h3>
+        <h3 class="text-center display-5 mb-4"> Редактироване новости <?php echo $article->getId(); ?> </h3>
 
         <form action="/admin/index/save?id=<?php echo $article->getId(); ?>" method="post">
             <div class="modal-body mb-5">
@@ -31,7 +31,7 @@
                 } ?>
             </div>
 
-            <a href="/admin" class="btn btn-primary"> Назад</a>
+            <a href="/admin/index/all" class="btn btn-primary"> Назад</a>
             <button type="submit" class="btn btn-success"> Сохранить</button>
         </form>
     </section>

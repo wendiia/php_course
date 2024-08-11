@@ -30,7 +30,7 @@
                 } ?>
             </div>
 
-            <a href="/admin" class="btn btn-primary"> Назад</a>
+            <a href="/admin/index/all" class="btn btn-primary"> Назад</a>
             <button type="submit" class="btn btn-success"> Сохранить</button>
         </form>
     </section>

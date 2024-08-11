@@ -2,30 +2,16 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\Controller;
+use App\Controllers\AdminController;
 use App\Exceptions\DbException;
 use App\Exceptions\Http404Exception;
 use App\Exceptions\ItemNotFoundException;
 use App\Exceptions\ModelErrors;
-use App\Exceptions\ModelException;
 use App\Models\Article;
-use App\Services\Authentication;
 use App\View;
 
-class Index extends Controller
+class Index extends AdminController
 {
-    /**
-     * @throws DbException
-     */
-    protected function access(): bool
-    {
-        if (null !== Authentication::getCurrentUser()) {
-            return true;
-        }
-
-        return false;
-    }
-
     /**
      * @throws DbException
      */
@@ -41,8 +27,9 @@ class Index extends Controller
     }
 
     /**
-     * @throws Http404Exception
      * @throws DbException
+     * @throws ItemNotFoundException
+     * @throws Http404Exception
      */
     public function actionEdit(): void
     {
@@ -55,8 +42,9 @@ class Index extends Controller
     }
 
     /**
-     * @throws Http404Exception
      * @throws DbException
+     * @throws ItemNotFoundException
+     * @throws Http404Exception
      */
     public function actionDelete(): void
     {
@@ -70,9 +58,9 @@ class Index extends Controller
     }
 
     /**
-     * @throws Http404Exception
      * @throws DbException
-     * @throws ModelException
+     * @throws ItemNotFoundException
+     * @throws Http404Exception
      */
     public function actionSave(): void
     {

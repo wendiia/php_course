@@ -19,10 +19,15 @@ class Authentication
      */
     public static function registration(string $login, string $password, string $confirmPassword): bool
     {
-        $registrationValidator = new RegistrationValidate();
-        $registrationValidator->validate($login, $password, $confirmPassword);
         $user = new User();
-        $user->login = $login;
+        $user->fill(
+            [
+            'login' => $login,
+            'password' => $password,
+            'confirmPassword' => $confirmPassword
+            ],
+            RegistrationValidate::class
+        );
         $user->password = password_hash($password, PASSWORD_DEFAULT);
 
         return $user->save();

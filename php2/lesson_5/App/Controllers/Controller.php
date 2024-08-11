@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Services\Authentication;
 use App\Exceptions\Http403Exception;
+use App\Exceptions\Http404Exception;
 use App\View;
 
 abstract class Controller
@@ -13,20 +15,26 @@ abstract class Controller
     {
         $this->view = new View();
 
-        if (!empty($_SESSION['login'])) {
+        if (null !== Authentication::getCurrentUser()) {
             $this->view->login = $_SESSION['login'];
         }
     }
 
     /**
      * @throws Http403Exception
+     * @throws Http404Exception
      */
-    public function action($name): void
+    public function action(string $name): void
     {
         if (true === $this->access()) {
             $actionName = 'action' . $name;
+
+            if (!method_exists($this, $actionName)) {
+                throw new Http404Exception();
+            }
+
             $this->$actionName();
-            exit();
+            return;
         }
 
         throw new Http403Exception();
@@ -35,5 +43,12 @@ abstract class Controller
     protected function access(): bool
     {
         return true;
+    }
+
+    protected function actionNotFound(): void
+    {
+        http_response_code(404);
+        $this->view->display(__DIR__ . '/../Templates/notFound.php');
+        exit();
     }
 }

@@ -10,7 +10,7 @@
 <div class="container align-center">
     <section class="mb-4">
         <h3 class="text-center display-5 mb-4"> Админ-панель новостей </h3>
-        <h4 class="text-center text-primary fs-5 mb-4"> Добро пожаловать, <?php echo $_SESSION['login']; ?>!</h4>
+        <h4 class="text-center text-primary fs-5 mb-4"> Добро пожаловать, <?php echo $login; ?>!</h4>
 
         <table class="table table-light align-middle">
             <thead>

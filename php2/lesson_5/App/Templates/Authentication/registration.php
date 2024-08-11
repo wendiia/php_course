@@ -9,7 +9,7 @@
 
 <div class="container d-flex flex-column align-items-center justify-content-center">
     <div class="">
-        <?php require_once __DIR__ . '/../navbar.php' ?>
+        <?php require_once __DIR__ . '/../navbar.php'?>
     </div>
 
     <section class="mb-4 w-50 ">
@@ -37,7 +37,7 @@
                 } ?>
             </div>
 
-            <button type="submit" class="btn btn-primary"> Подтвердить</button>
+            <button type="submit" class="btn btn-primary"> Подтвердить </button>
         </form>
     </section>
 </div>

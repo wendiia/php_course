@@ -19,11 +19,16 @@ abstract class Model
     /**
      * @throws ModelException
      */
-    public function fill(array $data): void
+    public function fill(array $data, string $validateClassName = ''): void
     {
-        $modelNameParts = explode('\\', static::class);
-        $modelName = end($modelNameParts);
-        $class = 'App\\Services\\Validation\\' . $modelName . 'Validate';
+        if (!empty($validateClassName)) {
+            $class = $validateClassName;
+        } else {
+            $modelNameParts = explode('\\', static::class);
+            $validateClassName = end($modelNameParts);
+            $class = 'App\\Services\\Validation\\' . $validateClassName . 'Validate';
+        }
+
         $validator = new $class();
         $validator->validate($data);
 
@@ -35,7 +40,7 @@ abstract class Model
     /**
      * @throws DbException
      */
-    public static function findAll(): array|false
+    public static function findAll(): array | false
     {
         $sql = 'SELECT * FROM ' . static::$table;
         $db = new Db();
@@ -44,9 +49,10 @@ abstract class Model
     }
 
     /**
-     * @throws ItemNotFoundException|Exceptions\DbException
+     * @throws DbException
+     * @throws ItemNotFoundException
      */
-    public static function findById(int $id): object|false
+    public static function findById(int $id): object | false
     {
         $sql = 'SELECT * FROM ' . static::$table . " WHERE id = :id";
         $db = new Db();
@@ -96,7 +102,7 @@ abstract class Model
         foreach ($fields as $name => $value) {
             if ($name !== 'id') {
                 $data[':' . $name] = $value;
-                $sets[] = ":" . $name;
+                $sets[] =  ":" . $name;
                 $keys[] = $name;
             }
         }

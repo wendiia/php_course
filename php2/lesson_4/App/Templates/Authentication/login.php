@@ -24,8 +24,8 @@
                 <input class="form-control" id="password" name="password" type="password">
             </div>
 
-            <?php if (!empty($authFail)) { ?>
-                <p class="text-danger"> <?php echo $authFail;?> </p>
+            <?php if (isset($authFail) && false === $authFail) { ?>
+                <p class="text-danger"> Неверный логин или пароль! </p>
             <?php } ?>
 
             <button type="submit" class="btn btn-primary"> Подтвердить </button>

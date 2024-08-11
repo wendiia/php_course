@@ -17,13 +17,11 @@ class Index extends Controller
         if (!empty($_GET['id'])) {
             $article = Article::findById($_GET['id']);
 
-            if (false === $article) {
-                $this->actionNotFound();
+            if (false !== $article) {
+                $this->view->article = $article;
+                $this->view->display(__DIR__ . '/../Templates/News/article.php');
+                return;
             }
-
-            $this->view->article = $article;
-            $this->view->display(__DIR__ . '/../Templates/News/article.php');
-            exit();
         }
 
         $this->actionNotFound();

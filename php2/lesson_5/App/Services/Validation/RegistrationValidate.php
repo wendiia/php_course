@@ -3,22 +3,27 @@
 namespace App\Services\Validation;
 
 use App\Exceptions\AuthErrors;
+use App\Exceptions\ModelException;
 use App\Exceptions\RegistrationException;
 use App\Models\User;
 
 class RegistrationValidate
 {
-    protected array $data;
     protected AuthErrors $errors;
 
     /**
      * @throws AuthErrors
      */
-    public function validate(string $login, string $password, ?string $confirmPassword = null): void
+    public function validate($data): void
     {
         $this->errors = new AuthErrors();
-        $this->checkLogin($login);
-        $this->checkPassword($password, $confirmPassword);
+
+        try {
+            $this->checkLogin($data['login']);
+            $this->checkPassword($data['password'], $data['confirmPassword']);
+        } catch (\TypeError  $e) {
+            throw new ModelException('Таких свойств модели не существует!');
+        }
 
         if (!empty($this->errors->getErrors())) {
             throw $this->errors;

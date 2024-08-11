@@ -13,13 +13,13 @@ class Article extends Model
 {
     protected static string $table = 'news';
     public ?int $author_id = null;
-    protected string $title;
-    protected string $lead;
+    public string $title;
+    public string $lead;
 
     /**
      * @throws DbException
      */
-    public function __get($key): mixed
+    public function __get(string $key): mixed
     {
         if ('author' === $key) {
             $db = new Db();

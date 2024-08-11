@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Authentication;
 use App\View;
 
 abstract class Controller
@@ -12,7 +13,7 @@ abstract class Controller
     {
         $this->view = new View();
 
-        if (!empty($_SESSION['login'])) {
+        if (null !== Authentication::getCurrentUser()) {
             $this->view->login = $_SESSION['login'];
         }
     }
@@ -21,11 +22,15 @@ abstract class Controller
     {
         if ($this->access()) {
             $actionName = 'action' . $name;
+
+            if (!method_exists($this, $actionName)) {
+                $this->actionNotFound();
+            }
+
             $this->$actionName();
         } else {
             http_response_code(403);
             $this->view->display(__DIR__ . '/../Templates/forbidden.php');
-            exit();
         }
     }
 
@@ -33,6 +38,7 @@ abstract class Controller
     {
         return true;
     }
+
     protected function actionNotFound(): void
     {
         http_response_code(404);

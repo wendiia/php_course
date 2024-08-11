@@ -1,32 +1,27 @@
 <?php
 
+require __DIR__ . '/autoload.php';
+
+use App\Exceptions\DbException;
 use App\Exceptions\Http403Exception;
 use App\Exceptions\Http404Exception;
-use App\Exceptions\DbException;
+use App\Router;
 use App\View;
-
-require __DIR__ . '/autoload.php';
 
 session_start();
 
+$prefixes = ['admin'];
+$url = $_SERVER['REQUEST_URI'];
 $view = new View();
-$act = 'All';
-$class = 'App\\Controllers\\Index';
-
-$urlWithoutGet = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$urlOnlyText = str_replace('/', '', $urlWithoutGet);
-
-if ('admin' === $urlOnlyText) {
-    $class = 'App\\Controllers\\Admin\\Index';
-} elseif (!empty($urlOnlyText)) {
-    $urlParts = explode('/', $urlWithoutGet);
-    $act = array_pop($urlParts);
-    $class = 'App\\Controllers' . implode('\\', $urlParts);
-}
 
 try {
-    $ctrl = new $class();
-    $ctrl->action($act);
+    foreach ($prefixes as $prefix) {
+        if (str_contains($url, $prefix)) {
+            Router::get($prefix);
+            return;
+        }
+    }
+    Router::get();
 } catch (Http404Exception $exception) {
     http_response_code(404);
     $view->display(__DIR__ . '/App/Templates/notFound.php');
@@ -36,7 +31,8 @@ try {
 } catch (DbException $exception) {
     $view->exception = $exception;
     $view->display(__DIR__ . '/App/Templates/dbException.php');
-} catch (\Throwable $exception) {
+}
+catch (\Throwable $exception) {
     $view->exception = $exception;
     $view->display(__DIR__ . '/App/Templates/exception.php');
 }

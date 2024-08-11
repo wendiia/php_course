@@ -2,21 +2,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\Controller;
+use App\Controllers\AdminController;
 use App\Models\Article;
-use App\Authentication;
 
-class Index extends Controller
+class Index extends AdminController
 {
-    protected function access(): bool
-    {
-        if (null !== Authentication::getCurrentUser()) {
-            return true;
-        }
-
-        return false;
-    }
-
     protected function actionAll(): void
     {
         $this->view->news = Article::findAll();
@@ -35,7 +25,7 @@ class Index extends Controller
 
             if (false !== $this->view->article) {
                 $this->view->display(__DIR__ . '/../../Templates/News/Admin/edit.php');
-                exit();
+                return;
             }
         }
 
@@ -49,8 +39,8 @@ class Index extends Controller
 
             if (false !== $article) {
                 $article->delete();
-                header('Location: /admin');
-                exit();
+                header('Location: /admin/index/all');
+                return;
             }
         }
 
@@ -74,7 +64,6 @@ class Index extends Controller
             $article->save();
         }
 
-        header('Location: /admin');
-        exit();
+        header('Location: /admin/index/all');
     }
 }

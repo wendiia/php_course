@@ -11,8 +11,7 @@ use App\Traits\PropertiesStorageTrait;
  * @property $news
  * @property $article
  * @property $login
- * @property $errors
- * @property $exception
+ * @property $authFail
  */
 
 class View implements Countable, Iterator
