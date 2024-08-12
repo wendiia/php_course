@@ -1,0 +1,5 @@
+2024.08.12 01:45   C:\xampp\htdocs\php_course\php2\lesson_6\App\Model.php   Line: 62   Item not found
+2024.08.12 01:50   C:\xampp\htdocs\php_course\php2\lesson_6\App\Model.php   Line: 62   Item not found
+2024.08.13 01:00   emergency   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_6\App\Model.php   Line: 62   Item not found
+2024.08.13 01:01   emergency   Критическая ошибка БД   C:\xampp\htdocs\php_course\php2\lesson_6\App\Db.php   Line: 27   SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+2024.08.13 01:06   error   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_6\App\Model.php   Line: 62   Item not found
