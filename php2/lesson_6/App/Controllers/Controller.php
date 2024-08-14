@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\DbException;
 use App\Services\Authentication;
 use App\Exceptions\Http403Exception;
 use App\Exceptions\Http404Exception;
@@ -11,6 +12,9 @@ abstract class Controller
 {
     protected View $view;
 
+    /**
+     * @throws DbException
+     */
     public function __construct()
     {
         $this->view = new View();

@@ -12,6 +12,7 @@ use App\Traits\PropertiesStorageTrait;
  * @property $article
  * @property $login
  * @property $authFail
+ * @property $errors
  */
 
 class View implements Countable, Iterator

@@ -2,17 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Lesson 5 </title>
+    <title> Lesson 6 </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
 
 <div class="container align-center">
     <section class="mb-4">
-        <h3 class="text-center display-5 mb-4"> Редактироване новости <?php echo $article->getId(); ?> </h3>
+        <h3 class="text-center display-5 mb-4"> Редактирование новости <?php echo $article->id; ?> </h3>
 
-        <form action="/admin/index/save?id=<?php echo $article->getId(); ?>" method="post">
+        <form action="/admin/index/save?id=<?php echo $article->id; ?>" method="post">
             <div class="modal-body mb-5">
+                <label for="author"> Автор: </label>
+                <select name="author_id" id="author" class="form-select" aria-label="select example">
+                    <option value="0"> Выберите автора </option>
+                    <?php if (!empty($authors)) {
+                        foreach ($authors as $author) { ?>
+                            <option <?php echo $author->id !== $article->author_id ?: 'selected' ?>
+                                    value="<?php echo $author->id ?>"> <?php echo $author->name ?> </option>
+                        <?php }
+                    } ?>
+                </select>
+                <?php if (!empty($errors['author_id'])) {
+                    foreach ($errors['author_id'] as $error) { ?>
+                        <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
+                    <?php }
+                } ?>
+
                 <label for="title"> Название: </label>
                 <input class="form-control" id="title" name="title" type="text" value="<?php echo $article->title; ?>">
                 <?php if (!empty($errors['title'])) {

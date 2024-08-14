@@ -7,5 +7,5 @@ use App\Model;
 class Author extends Model
 {
     protected static string $table = 'authors';
-    public string $name;
+    protected string $name;
 }

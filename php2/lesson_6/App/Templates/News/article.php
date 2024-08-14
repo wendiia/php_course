@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Lesson 5 </title>
+    <title> Lesson 6 </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
     <div class="row g-3 mb-5">
         <div class="col-12 p-3" style="border-radius: 15px; background: #dde5ee; color: #626e7c ">
             <p class="p-0 m-0">
-                Автор: <?php echo $article->author->name ?? 'нет автора'; ?>
+                Автор: <?php echo $article->author_id ? $article->author->name : 'Нет автора'; ?>
             </p>
             <p class="fs-5"> <?php echo $article->title; ?></p>
             <p class="p-0 m-0"> <?php echo $article->lead; ?></p> </div>
