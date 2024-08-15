@@ -16,6 +16,7 @@
             <thead>
             <tr>
                 <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Автор ID</th>
                 <th class="text-center" scope="col">Название</th>
                 <th class="text-center" scope="col">Описание</th>
                 <th class="text-center" scope="col">Редактирование</th>
@@ -24,14 +25,15 @@
             <tbody>
             <?php foreach ($news as $article) { ?>
                 <tr>
-                    <th class="text-center" scope="row"> <?php echo $article->getId(); ?> </th>
+                    <th class="text-center" scope="row"> <?php echo $article->id; ?> </th>
+                    <td class="text-center"> <?php echo $article->author_id ?? '-'; ?> </td>
                     <td class="text-center"> <?php echo $article->title; ?> </td>
                     <td class="text-center"> <?php echo $article->lead; ?> </td>
                     <td class="text-center">
-                        <a href="/admin/index/edit?id=<?php echo $article->getId(); ?>" class="btn btn-primary me-3">
+                        <a href="/admin/index/edit?id=<?php echo $article->id; ?>" class="btn btn-primary me-3">
                             Изменить
                         </a>
-                        <a href="/admin/index/delete?id=<?php echo $article->getId(); ?>" class="btn btn-danger">
+                        <a href="/admin/index/delete?id=<?php echo $article->id; ?>" class="btn btn-danger">
                             Удалить
                         </a>
                     </td>

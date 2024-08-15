@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Exceptions\AuthErrors;
+use App\Exceptions\DbException;
 use App\Exceptions\ItemNotFoundException;
 use App\Exceptions\LoginException;
+use App\Exceptions\ModelException;
+use App\Exceptions\RegistrationException;
 use App\Services\Authentication;
 
 class User extends Controller
@@ -22,7 +24,6 @@ class User extends Controller
     /**
      * @throws ItemNotFoundException
      * @throws DbException
-     * @throws LoginException
      */
     protected function actionLoginUser(): void
     {
@@ -44,8 +45,11 @@ class User extends Controller
                 $_POST['confirm_password']
             );
             header('Location: /');
-        } catch (AuthErrors $exception) {
+        } catch (ModelException $exception) {
             $this->view->errors = $exception->getErrors();
+            $this->actionRegister();
+        } catch (RegistrationException $exception) {
+            $this->view->errorCommon = $exception;
             $this->actionRegister();
         }
     }

@@ -7,7 +7,7 @@ use Exception;
 
 class DbException extends Exception
 {
-    public function __construct($e=null)
+    public function __construct($e = null)
     {
         Logger::log($e);
     }

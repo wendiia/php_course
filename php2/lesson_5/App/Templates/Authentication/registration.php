@@ -9,7 +9,7 @@
 
 <div class="container d-flex flex-column align-items-center justify-content-center">
     <div class="">
-        <?php require_once __DIR__ . '/../navbar.php'?>
+        <?php require_once __DIR__ . '/../navbar.php' ?>
     </div>
 
     <section class="mb-4 w-50 ">
@@ -27,17 +27,20 @@
 
                 <label for="password"> Пароль: </label>
                 <input class="form-control" id="password" name="password" type="password">
-
-                <label for="confirm_password"> Подтвердите пароль: </label>
-                <input class="form-control" id="confirm_password" name="confirm_password" type="password">
                 <?php if (!empty($errors['password'])) {
                     foreach ($errors['password'] as $error) { ?>
                         <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
                     <?php }
                 } ?>
+
+                <label for="confirm_password"> Подтвердите пароль: </label>
+                <input class="form-control" id="confirm_password" name="confirm_password" type="password">
+                <?php if (!empty($errorCommon)) { ?>
+                    <p class="text-danger py-0 my-0"> <?php echo $errorCommon->getMessage(); ?> </p>
+                <?php } ?>
             </div>
 
-            <button type="submit" class="btn btn-primary"> Подтвердить </button>
+            <button type="submit" class="btn btn-primary"> Подтвердить</button>
         </form>
     </section>
 </div>

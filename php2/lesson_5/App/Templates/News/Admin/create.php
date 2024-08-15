@@ -13,6 +13,22 @@
 
         <form action="/admin/index/save" method="post">
             <div class="modal-body mb-5">
+
+                <label for="author"> Автор: </label>
+                <select name="author_id" id="author" class="form-select" aria-label="select example">
+                    <option value="0" selected> Выберите автора </option>
+                    <?php if (!empty($authors)) {
+                        foreach ($authors as $author) { ?>
+                            <option value="<?php echo $author->id ?>"> <?php echo $author->name ?> </option>
+                        <?php }
+                    } ?>
+                </select>
+                <?php if (!empty($errors['author_id'])) {
+                    foreach ($errors['author_id'] as $error) { ?>
+                        <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
+                    <?php }
+                } ?>
+
                 <label for="title"> Название: </label>
                 <input class="form-control" id="title" name="title" type="text">
                 <?php if (!empty($errors['title'])) {

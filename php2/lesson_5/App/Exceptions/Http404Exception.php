@@ -7,7 +7,7 @@ use Exception;
 
 class Http404Exception extends Exception
 {
-    public function __construct($e=null)
+    public function __construct($e = null)
     {
         Logger::log($e);
     }

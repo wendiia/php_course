@@ -4,6 +4,7 @@ namespace App;
 
 use App\Exceptions\DbException;
 use App\Exceptions\ItemNotFoundException;
+use App\Exceptions\ModelErrors;
 use App\Exceptions\ModelException;
 
 abstract class Model
@@ -11,36 +12,62 @@ abstract class Model
     protected ?int $id = null;
     protected static string $table = '';
 
-    public function getId(): ?int
+    public function __get(string $key): mixed
     {
-        return $this->id;
+        if (isset($this->$key)) {
+            return $this->$key;
+        }
+
+        return null;
+    }
+
+    public function __isset(string $key): bool
+    {
+        return isset($this->$key);
+    }
+
+    /**
+     * @throws ModelException
+     * @throws ModelErrors
+     */
+    protected function setProperty(string $key, $value): void
+    {
+        $nameValidateMethod = 'validate' . str_replace('_', '', $key);
+
+        if (method_exists($this, $nameValidateMethod)) {
+            $this->$nameValidateMethod($value);
+            $this->$key = $value;
+        } else {
+            throw new ModelException('Такого свойства у модели не существует!');
+        }
     }
 
     /**
      * @throws ModelException
      */
-    public function fill(array $data, string $validateClassName = ''): void
+    public function fill(array $data): void
     {
-        if (!empty($validateClassName)) {
-            $class = $validateClassName;
-        } else {
-            $modelNameParts = explode('\\', static::class);
-            $validateClassName = end($modelNameParts);
-            $class = 'App\\Services\\Validation\\' . $validateClassName . 'Validate';
-        }
-
-        $validator = new $class();
-        $validator->validate($data);
+        $multiExceptions = new ModelException();
 
         foreach ($data as $key => $value) {
-            $this->$key = $value;
+            try {
+                $this->setProperty($key, $value);
+            } catch (ModelErrors $e) {
+                $multiExceptions->$key = $e->getErrors();
+            } catch (ModelException $e) {
+                $multiExceptions->$key = $e;
+            }
+        }
+
+        if (!empty($multiExceptions->getErrors())) {
+            throw $multiExceptions;
         }
     }
 
     /**
      * @throws DbException
      */
-    public static function findAll(): array | false
+    public static function findAll(): array|false
     {
         $sql = 'SELECT * FROM ' . static::$table;
         $db = new Db();
@@ -52,7 +79,7 @@ abstract class Model
      * @throws DbException
      * @throws ItemNotFoundException
      */
-    public static function findById(int $id): object | false
+    public static function findById(int $id): object|false
     {
         $sql = 'SELECT * FROM ' . static::$table . " WHERE id = :id";
         $db = new Db();
@@ -102,7 +129,7 @@ abstract class Model
         foreach ($fields as $name => $value) {
             if ($name !== 'id') {
                 $data[':' . $name] = $value;
-                $sets[] =  ":" . $name;
+                $sets[] = ":" . $name;
                 $keys[] = $name;
             }
         }

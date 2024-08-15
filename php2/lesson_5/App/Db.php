@@ -41,7 +41,7 @@ class Db
         try {
             return $sth->execute($params);
         } catch (PDOException $e) {
-            throw new DbException('Произошла ошибка выполнения запроса!');
+            throw new DbException($e);
         }
     }
 
@@ -61,7 +61,7 @@ class Db
             $sth->execute($params);
             return $sth->fetchAll(PDO::FETCH_CLASS, $class);
         } catch (PDOException $e) {
-            throw new DbException('Произошла ошибка выполнения запроса!');
+            throw new DbException($e);
         }
     }
 }
