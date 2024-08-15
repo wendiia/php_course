@@ -21,6 +21,13 @@ abstract class Model
         return null;
     }
 
+    public function __set(string | int $key, mixed $value): void
+    {
+        if (isset($this->$key)) {
+            $this->$key = $value;
+        }
+    }
+
     public function __isset(string $key): bool
     {
         return isset($this->$key);

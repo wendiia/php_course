@@ -6,6 +6,7 @@ use App\Exceptions\DbException;
 use App\Exceptions\ItemNotFoundException;
 use App\Exceptions\ModelErrors;
 use App\Exceptions\ModelException;
+use Generator;
 
 abstract class Model
 {
@@ -74,12 +75,12 @@ abstract class Model
     /**
      * @throws DbException
      */
-    public static function findAll(): array|false
+    public static function findAll(): Generator
     {
         $sql = 'SELECT * FROM ' . static::$table;
         $db = new Db();
 
-        return $db->query($sql, [], static::class);
+        return $db->queryEach($sql, [], static::class);
     }
 
     /**

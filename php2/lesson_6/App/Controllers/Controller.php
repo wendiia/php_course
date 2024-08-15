@@ -48,11 +48,4 @@ abstract class Controller
     {
         return true;
     }
-
-    protected function actionNotFound(): void
-    {
-        http_response_code(404);
-        $this->view->display(__DIR__ . '/../Templates/notFound.php');
-        exit();
-    }
 }

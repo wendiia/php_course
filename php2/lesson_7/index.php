@@ -5,6 +5,7 @@ require __DIR__ . '/autoload.php';
 use App\Exceptions\DbException;
 use App\Exceptions\Http403Exception;
 use App\Exceptions\Http404Exception;
+use App\Exceptions\ItemNotFoundException;
 use App\Router;
 use App\View;
 
@@ -22,7 +23,7 @@ try {
         }
     }
     Router::get();
-} catch (Http404Exception $exception) {
+} catch (ItemNotFoundException | Http404Exception $exception) {
     http_response_code(404);
     $view->display(__DIR__ . '/App/Templates/notFound.php');
 } catch (Http403Exception $exception) {

@@ -17,7 +17,6 @@ class User extends Model
 
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
      */
     public static function findByLogin(string $login): User | false
     {
@@ -25,11 +24,7 @@ class User extends Model
         $db = new Db();
         $record = $db->query($sql, ['login' => $login], static::class);
 
-        if (empty($record)) {
-            throw new ItemNotFoundException('Item not found');
-        }
-
-        return $record[0];
+        return !empty($record[0]) ? $record[0] : false;
     }
 
     /**

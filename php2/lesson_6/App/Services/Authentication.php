@@ -18,6 +18,7 @@ class Authentication
      */
     public static function registration(string $login, string $password, string $confirmPassword): bool
     {
+
         $user = new User();
         $user->fill(['login' => $login, 'password' => $password]);
 
@@ -33,7 +34,6 @@ class Authentication
     /**
      * @throws LoginException
      * @throws DbException
-     * @throws ItemNotFoundException
      */
     public static function login(string $login, string $password): bool
     {
@@ -47,7 +47,7 @@ class Authentication
 
     /**
      * @throws DbException
-     * @throws LoginException
+     * @throws LoginException|ItemNotFoundException
      */
     protected static function checkLoginAndPassword(string $login, string $password): bool
     {
@@ -65,8 +65,13 @@ class Authentication
      */
     public static function getCurrentUser(): ?User
     {
-        if (!empty($_SESSION['login'])) {
-            return User::findByLogin($_SESSION['login']);
+        try {
+            if (!empty($_SESSION['login'])) {
+                return User::findByLogin($_SESSION['login']);
+            }
+        } catch (\TypeError $e) {
+            session_destroy();
+            header('Location: /');
         }
 
         return null;
