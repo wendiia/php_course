@@ -37,12 +37,3 @@ catch (\Throwable $exception) {
     $view->exception = $exception;
     $view->display(__DIR__ . '/App/Templates/exception.php');
 }
-
-
-
-//use App\Models\Article;
-//
-//$article = Article::findById(4);
-//var_dump($article);
-//var_dump(empty($article->author));
-

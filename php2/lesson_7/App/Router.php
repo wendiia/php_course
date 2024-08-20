@@ -11,7 +11,7 @@ class Router
         $urlParts = explode('/', $path);
 
         if (empty($urlParts[0])) {
-            array_shift($urlParts);
+            unset($urlParts[0]);
         }
 
         $lastUrlPart = array_pop($urlParts);

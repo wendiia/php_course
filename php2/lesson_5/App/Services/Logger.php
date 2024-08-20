@@ -4,8 +4,6 @@ namespace App\Services;
 
 class Logger
 {
-    protected static string $filePath = __DIR__ . '/../../data/log.txt';
-
     public static function log(\Throwable $error): void
     {
         date_default_timezone_set('Europe/Moscow');
@@ -17,6 +15,6 @@ class Logger
             $error->getMessage()
         ]);
 
-        file_put_contents(self::$filePath, $errorRecord . PHP_EOL, FILE_APPEND);
+        file_put_contents(__DIR__ . '/../../data/log.txt', $errorRecord . PHP_EOL, FILE_APPEND);
     }
 }
