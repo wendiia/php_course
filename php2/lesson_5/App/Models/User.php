@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Db;
 use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
-use App\Exceptions\ModelErrors;
-use App\Exceptions\ModelException;
+use App\Exceptions\Errors;
 use App\Model;
+use Exception;
 
 class User extends Model
 {
@@ -28,22 +27,22 @@ class User extends Model
     }
 
     /**
-     * @throws ModelErrors
      * @throws DbException
+     * @throws Errors
      */
     protected function validateLogin(string $login): void
     {
-        $errors = new ModelErrors();
+        $errors = new Errors();
 
         if (!empty($login)) {
             if (strlen($login) < 3) {
-                $errors->addError(new ModelException('Логин должен быть не менее 3 символов'));
+                $errors->addError(new Exception('Логин должен быть не менее 3 символов'));
             }
             if (!empty(User::findByLogin($login))) {
-                $errors->addError(new ModelException('Такой логин уже существует'));
+                $errors->addError(new Exception('Такой логин уже существует'));
             }
         } else {
-            $errors->addError(new ModelException('Введите логин'));
+            $errors->addError(new Exception('Поле логин не может быть пустым'));
         }
 
         if (!empty($errors->getErrors())) {
@@ -52,21 +51,42 @@ class User extends Model
     }
 
     /**
-     * @throws ModelErrors
+     * @throws Errors
      */
     protected function validatePassword(string $password): void
     {
-        $errors = new ModelErrors();
+        $errors = new Errors();
 
         if (!empty($password)) {
             if (strlen($password) < 6) {
-                $errors->addError(new ModelException('Пароль должен быть не менее 6 символов'));
+                $errors->addError(new Exception('Пароль должен быть не менее 6 символов'));
             }
             if (str_contains($password, 'qwer')) {
-                $errors->addError(new ModelException('Пароль не должен содержать qwer'));
+                $errors->addError(new Exception('Пароль не должен содержать qwer'));
             }
         } else {
-            $errors->addError(new ModelException('Введите пароль'));
+            $errors->addError(new Exception('Поле пароль не может быть пустым'));
+        }
+
+        if (!empty($errors->getErrors())) {
+            throw $errors;
+        }
+    }
+
+    /**
+     * @throws Errors
+     */
+    protected function validateConfirmPassword(string $confirmPassword): void
+    {
+        $errors = new Errors();
+        $password = $_POST['password'];
+
+        if (!empty($confirmPassword)) {
+            if ($password !== $confirmPassword) {
+                $errors->addError(new Exception('Пароли не совпадают'));
+            }
+        } else {
+            $errors->addError(new Exception('Поле подтверждения пароля не может быть пустым'));
         }
 
         if (!empty($errors->getErrors())) {

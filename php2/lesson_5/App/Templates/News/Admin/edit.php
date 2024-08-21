@@ -24,7 +24,7 @@
                     } ?>
                 </select>
                 <?php if (!empty($errors['author_id'])) {
-                    foreach ($errors['author_id'] as $error) { ?>
+                    foreach ($errors['author_id']->getErrors() as $error) { ?>
                         <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
                     <?php }
                 } ?>
@@ -32,7 +32,7 @@
                 <label for="title"> Название: </label>
                 <input class="form-control" id="title" name="title" type="text" value="<?php echo $article->title; ?>">
                 <?php if (!empty($errors['title'])) {
-                    foreach ($errors['title'] as $error) { ?>
+                    foreach ($errors['title']->getErrors() as $error) { ?>
                         <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
                     <?php }
                 } ?>
@@ -41,7 +41,7 @@
                 <textarea class="form-control"
                           id="lead" name="lead" type="text"><?php echo $article->lead; ?></textarea>
                 <?php if (!empty($errors['lead'])) {
-                    foreach ($errors['lead'] as $error) { ?>
+                    foreach ($errors['lead']->getErrors() as $error) { ?>
                         <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
                     <?php }
                 } ?>

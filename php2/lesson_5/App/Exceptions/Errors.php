@@ -8,9 +8,9 @@ class Errors extends Exception
 {
     protected array $errors = [];
 
-    public function addError(\Throwable $error): void
+    public function addError(\Throwable $error, string $key = ''): void
     {
-        $this->errors[] = $error;
+        $this->errors[$key] = $error;
     }
 
     public function getErrors(): array

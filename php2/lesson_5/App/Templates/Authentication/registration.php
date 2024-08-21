@@ -20,7 +20,7 @@
                 <label for="login"> Логин: </label>
                 <input class="form-control" id="login" name="login" type="text">
                 <?php if (!empty($errors['login'])) {
-                    foreach ($errors['login'] as $error) { ?>
+                    foreach ($errors['login']->getErrors() as $error) { ?>
                         <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
                     <?php }
                 } ?>
@@ -28,16 +28,18 @@
                 <label for="password"> Пароль: </label>
                 <input class="form-control" id="password" name="password" type="password">
                 <?php if (!empty($errors['password'])) {
-                    foreach ($errors['password'] as $error) { ?>
+                    foreach ($errors['password']->getErrors() as $error) { ?>
                         <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
                     <?php }
                 } ?>
 
                 <label for="confirm_password"> Подтвердите пароль: </label>
                 <input class="form-control" id="confirm_password" name="confirm_password" type="password">
-                <?php if (!empty($errorCommon)) { ?>
-                    <p class="text-danger py-0 my-0"> <?php echo $errorCommon->getMessage(); ?> </p>
-                <?php } ?>
+                <?php if (!empty($errors['confirmPassword'])) {
+                    foreach ($errors['confirmPassword']->getErrors() as $error) { ?>
+                        <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
+                    <?php }
+                } ?>
             </div>
 
             <button type="submit" class="btn btn-primary"> Подтвердить</button>
