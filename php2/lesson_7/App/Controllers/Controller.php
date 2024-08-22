@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
 use App\Services\Authentication;
 use App\Exceptions\Http403Exception;
 use App\Exceptions\Http404Exception;
@@ -15,15 +14,11 @@ abstract class Controller
 
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
      */
     public function __construct()
     {
         $this->view = new View();
-
-        if (null !== Authentication::getCurrentUser()) {
-            $this->view->login = $_SESSION['login'];
-        }
+        $this->view->login = Authentication::getCurrentUser()?->login;
     }
 
     /**

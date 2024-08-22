@@ -3,36 +3,29 @@
 namespace App\Services;
 
 use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
-use App\Exceptions\LoginException;
-use App\Exceptions\ModelException;
-use App\Exceptions\RegistrationException;
+use App\Exceptions\Errors;
 use App\Models\User;
 
 class Authentication
 {
     /**
+     * @throws Errors
      * @throws DbException
-     * @throws ModelException
-     * @throws RegistrationException
      */
     public static function registration(string $login, string $password, string $confirmPassword): bool
     {
-
         $user = new User();
-        $user->fill(['login' => $login, 'password' => $password]);
-
-        if ($password !== $confirmPassword) {
-            throw new RegistrationException('Пароли не совпадают');
-        }
-
+        $user->fill([
+            'login' => $login,
+            'password' => $password,
+            'confirm_password' => $confirmPassword
+        ]);
         $user->password = password_hash($password, PASSWORD_DEFAULT);
 
         return $user->save();
     }
 
     /**
-     * @throws LoginException
      * @throws DbException
      */
     public static function login(string $login, string $password): bool
@@ -47,7 +40,6 @@ class Authentication
 
     /**
      * @throws DbException
-     * @throws LoginException|ItemNotFoundException
      */
     protected static function checkLoginAndPassword(string $login, string $password): bool
     {
@@ -57,7 +49,7 @@ class Authentication
             return true;
         }
 
-        throw new LoginException("Неверный логин или пароль!");
+        return false;
     }
 
     /**

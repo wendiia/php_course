@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Exceptions\DbException;
 use App\Exceptions\Http404Exception;
-use App\Exceptions\ItemNotFoundException;
 use App\Models\Article;
 
 class Index extends Controller
@@ -24,11 +23,7 @@ class Index extends Controller
      */
     protected function actionOne(): void
     {
-        try {
-            $this->view->article = Article::findById($_GET['id']);
-            $this->view->display(__DIR__ . '/../Templates/News/article.php');
-        } catch (ItemNotFoundException $e) {
-            throw new Http404Exception($e);
-        }
+        $this->view->article = Article::findById($_GET['id']);
+        $this->view->display(__DIR__ . '/../Templates/News/article.php');
     }
 }

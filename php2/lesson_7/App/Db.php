@@ -3,10 +3,10 @@
 namespace App;
 
 use App\Exceptions\DbException;
+use Generator;
 use PDO;
 use PDOException;
 use stdClass;
-use Generator;
 
 class Db
 {
@@ -54,7 +54,7 @@ class Db
     /**
      * @throws DbException
      */
-    public function query(string $sql, array $params = [], string $class = stdClass::class): array|false
+    public function query(string $sql, array $params = [], $class = stdClass::class): array|false
     {
         $sth = $this->dbh->prepare($sql);
 

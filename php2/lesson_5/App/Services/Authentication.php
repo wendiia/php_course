@@ -18,7 +18,7 @@ class Authentication
         $user->fill([
             'login' => $login,
             'password' => $password,
-            'confirmPassword' => $confirmPassword
+            'confirm_password' => $confirmPassword
         ]);
         $user->password = password_hash($password, PASSWORD_DEFAULT);
 

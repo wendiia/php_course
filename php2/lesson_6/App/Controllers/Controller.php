@@ -18,10 +18,7 @@ abstract class Controller
     public function __construct()
     {
         $this->view = new View();
-
-        if (null !== Authentication::getCurrentUser()) {
-            $this->view->login = $_SESSION['login'];
-        }
+        $this->view->login = Authentication::getCurrentUser()?->login;
     }
 
     /**

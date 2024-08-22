@@ -36,13 +36,13 @@ class User extends Model
 
         if (!empty($login)) {
             if (strlen($login) < 3) {
-                $errors->addError(new Exception('Логин должен быть не менее 3 символов'));
+                $errors->addError(new Exception('Логин должен быть не менее 3 символов'), 'login');
             }
             if (!empty(User::findByLogin($login))) {
-                $errors->addError(new Exception('Такой логин уже существует'));
+                $errors->addError(new Exception('Такой логин уже существует'), 'login');
             }
         } else {
-            $errors->addError(new Exception('Поле логин не может быть пустым'));
+            $errors->addError(new Exception('Поле логин не может быть пустым'), 'login');
         }
 
         if (!empty($errors->getErrors())) {
@@ -76,17 +76,18 @@ class User extends Model
     /**
      * @throws Errors
      */
-    protected function validateConfirmPassword(string $confirmPassword): void
+    protected function validateConfirmPassword(string $password, string $confirmPassword): void
     {
         $errors = new Errors();
-        $password = $_POST['password'];
 
         if (!empty($confirmPassword)) {
             if ($password !== $confirmPassword) {
                 $errors->addError(new Exception('Пароли не совпадают'));
             }
         } else {
-            $errors->addError(new Exception('Поле подтверждения пароля не может быть пустым'));
+            $errors->addError(
+                new Exception('Поле подтверждения пароля не может быть пустым'),
+            );
         }
 
         if (!empty($errors->getErrors())) {

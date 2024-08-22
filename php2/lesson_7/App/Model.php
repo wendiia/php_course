@@ -3,9 +3,10 @@
 namespace App;
 
 use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
-use App\Exceptions\ModelErrors;
+use App\Exceptions\Errors;
+use App\Exceptions\Http404Exception;
 use App\Exceptions\ModelException;
+use Exception;
 use Generator;
 
 abstract class Model
@@ -22,7 +23,7 @@ abstract class Model
         return null;
     }
 
-    public function __set(string | int $key, mixed $value): void
+    public function __set(string|int $key, mixed $value): void
     {
         if (isset($this->$key)) {
             $this->$key = $value;
@@ -35,8 +36,7 @@ abstract class Model
     }
 
     /**
-     * @throws ModelException
-     * @throws ModelErrors
+     * @throws Exception
      */
     protected function setProperty(string $key, $value): void
     {
@@ -46,11 +46,12 @@ abstract class Model
             $this->$nameValidateMethod($value);
             $this->$key = $value;
         } else {
-            throw new ModelException('Такого свойства у модели не существует!');
+            throw new Exception('Такого свойства у модели не существует!');
         }
     }
 
     /**
+     * @throws Errors
      * @throws ModelException
      */
     public function fill(array $data): void
@@ -59,14 +60,17 @@ abstract class Model
 
         foreach ($data as $key => $value) {
             try {
-                $this->setProperty($key, $value);
-            } catch (ModelErrors $e) {
-                $multiExceptions->$key = $e->getErrors();
-            } catch (ModelException $e) {
-                $multiExceptions->$key = $e;
+                if (str_contains($key, 'confirm')) {
+                    $valueConfirm = explode('_', $key)[1];
+                    $nameValidateMethod = 'validate' . str_replace('_', '', $key);
+                    $this->$nameValidateMethod($data[$valueConfirm], $value);
+                } else {
+                    $this->setProperty($key, $value);
+                }
+            } catch (Exception $e) {
+                $multiExceptions->addError($key, $e->getErrors());
             }
         }
-
         if (!empty($multiExceptions->getErrors())) {
             throw $multiExceptions;
         }
@@ -85,7 +89,7 @@ abstract class Model
 
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
+     * @throws Http404Exception
      */
     public static function findById(int $id): object|false
     {
@@ -94,7 +98,7 @@ abstract class Model
         $record = $db->query($sql, ['id' => $id], static::class);
 
         if (empty($record)) {
-            throw new ItemNotFoundException('Item not found');
+            throw new Http404Exception();
         }
 
         return $record[0];

@@ -1,1 +1,14 @@
-2024.08.15 23:33   error   Данная страница не найдена   C:\xampp\htdocs\php_course0\php2\lesson_7\App\Model.php   Line: 90   Item not found
+2024.08.22 20:43   emergency   Критическая ошибка БД   C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Db.php   Line: 30   PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Db.php:27
+Stack trace:
+#0 C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Db.php(27): PDO->__construct('mysql:host=loca...', 'root', '23')
+#1 C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Model.php(84): App\Db->__construct()
+#2 C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Controllers\Index.php(16): App\Model::findAll()
+#3 C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Controllers\Controller.php(37): App\Controllers\Index->actionAll()
+#4 C:\xampp\htdocs\php_course\php2\lesson_6_test\App\Router.php(36): App\Controllers\Controller->action('All')
+#5 C:\xampp\htdocs\php_course\php2\lesson_6_test\index.php(26): App\Router::get()
+#6 {main}
+2024.08.22 20:44   error   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_6\App\Controllers\Controller.php   Line: 34   
+2024.08.22 20:53   error   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_7_test\App\Controllers\Controller.php   Line: 34   
+2024.08.22 20:54   error   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_7_test\App\Model.php   Line: 101   
+2024.08.22 20:55   error   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_7_test\App\Model.php   Line: 101   
+2024.08.22 20:58   error   Данная страница не найдена   C:\xampp\htdocs\php_course\php2\lesson_7\App\Controllers\Controller.php   Line: 34   

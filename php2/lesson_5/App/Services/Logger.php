@@ -6,8 +6,6 @@ class Logger
 {
     public static function log(\Throwable $error): void
     {
-        date_default_timezone_set('Europe/Moscow');
-
         $errorRecord = implode('   ', [
             date("Y.m.d H:i"),
             $error->getFile(),

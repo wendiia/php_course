@@ -2,12 +2,16 @@
 
 namespace App\Exceptions;
 
-use App\Traits\PropertiesStorageTrait;
 use Exception;
 
 class ModelException extends Exception
 {
-    use PropertiesStorageTrait;
+    protected array $data;
+
+    public function addError(string $key, array $value): void
+    {
+        $this->data[$key] = $value;
+    }
 
     public function getErrors(): ?array
     {

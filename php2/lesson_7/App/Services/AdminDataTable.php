@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
 use App\View;
 use Generator;
 
@@ -20,7 +19,6 @@ class AdminDataTable
 
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
      */
     public function render(): void
     {
@@ -33,11 +31,7 @@ class AdminDataTable
         }
 
         $view = new View();
-
-        if (null !== Authentication::getCurrentUser()) {
-            $view->login = $_SESSION['login'];
-        }
-
+        $view->login = Authentication::getCurrentUser()?->login;
         $view->news = $news;
         $view->display(__DIR__ . '/../Templates/News/Admin/index.php');
     }

@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Db;
 use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
-use App\Exceptions\ModelErrors;
-use App\Exceptions\ModelException;
+use App\Exceptions\Errors;
 use App\Model;
+use Exception;
 
 /**
  * @property Author $author
@@ -37,19 +36,18 @@ class Article extends Model
 
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
-     * @throws ModelErrors
+     * @throws Errors
      */
     protected function validateAuthorId(int $author_id): void
     {
-        $errors = new ModelErrors();
+        $errors = new Errors();
 
         if (!empty($author_id)) {
             if (false === Author::findById($author_id)) {
-                $errors->addError(new ModelException('Такого автора не существует'));
+                $errors->addError(new Exception('Такого автора не существует'));
             }
         } else {
-            $errors->addError(new ModelException('Выберите автора'));
+            $errors->addError(new Exception('Поле автора статьи не может быть пустым'));
         }
 
         if (!empty($errors->getErrors())) {
@@ -58,21 +56,21 @@ class Article extends Model
     }
 
     /**
-     * @throws ModelErrors
+     * @throws Errors
      */
     protected function validateTitle(string $title): void
     {
-        $errors = new ModelErrors();
+        $errors = new Errors();
 
         if (!empty($title)) {
             if (strlen($title) > 20) {
-                $errors->addError(new ModelException('Название должно быть менее 20 символов'));
+                $errors->addError(new Exception('Название должно быть менее 20 символов'));
             }
             if (str_contains($title, '!')) {
-                $errors->addError(new ModelException('Название не должно иметь символ "!"'));
+                $errors->addError(new Exception('Название не должно иметь символ "!"'));
             }
         } else {
-            $errors->addError(new ModelException('Название статьи не может быть пустым'));
+            $errors->addError(new Exception('Название статьи не может быть пустым'));
         }
 
         if (!empty($errors->getErrors())) {
@@ -81,21 +79,21 @@ class Article extends Model
     }
 
     /**
-     * @throws ModelErrors
+     * @throws Errors
      */
     protected function validateLead(string $lead): void
     {
-        $errors = new ModelErrors();
+        $errors = new Errors();
 
         if (!empty($lead)) {
             if (strlen($lead) < 10) {
-                $errors->addError(new ModelException('Описание должно быть не менее 10 символов'));
+                $errors->addError(new Exception('Описание должно быть не менее 10 символов'));
             }
             if (str_contains($lead, '*')) {
-                $errors->addError(new ModelException('Описание не должно иметь символ "*"'));
+                $errors->addError(new Exception('Описание не должно иметь символ "*"'));
             }
         } else {
-            $errors->addError(new ModelException('Описание статьи не может быть пустым'));
+            $errors->addError(new Exception('Описание статьи не может быть пустым'));
         }
 
         if (!empty($errors->getErrors())) {

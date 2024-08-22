@@ -2,12 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Exceptions\DbException;
-use App\Exceptions\ItemNotFoundException;
-use App\Exceptions\LoginException;
-use App\Exceptions\ModelException;
-use App\Exceptions\RegistrationException;
 use App\Services\Authentication;
+use Exception;
 
 class User extends Controller
 {
@@ -21,18 +17,14 @@ class User extends Controller
         $this->view->display(__DIR__ . '/../Templates/Authentication/registration.php');
     }
 
-    /**
-     * @throws DbException
-     */
     protected function actionLoginUser(): void
     {
-        try {
-            Authentication::login($_POST['login'], $_POST['password']);
+        if (true === Authentication::login($_POST['login'], $_POST['password'])) {
             header('Location: /admin');
-        } catch (LoginException $e) {
-            $this->view->authFail = false;
-            $this->actionLogin();
         }
+
+        $this->view->authFail = false;
+        $this->actionLogin();
     }
 
     protected function actionRegisterUser(): void
@@ -44,11 +36,8 @@ class User extends Controller
                 $_POST['confirm_password']
             );
             header('Location: /');
-        } catch (ModelException $exception) {
+        } catch (Exception $exception) {
             $this->view->errors = $exception->getErrors();
-            $this->actionRegister();
-        } catch (RegistrationException $exception) {
-            $this->view->errorCommon = $exception;
             $this->actionRegister();
         }
     }

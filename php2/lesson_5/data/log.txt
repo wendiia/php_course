@@ -1,10 +1,2 @@
-2024.08.22 00:33   C:\xampp\htdocs\php_course\php2\lesson_5\App\Db.php   Line: 30   PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\php_course\php2\lesson_5\App\Db.php:27
-Stack trace:
-#0 C:\xampp\htdocs\php_course\php2\lesson_5\App\Db.php(27): PDO->__construct('mysql:host=loca...', 'root', '66')
-#1 C:\xampp\htdocs\php_course\php2\lesson_5\App\Models\User.php(23): App\Db->__construct()
-#2 C:\xampp\htdocs\php_course\php2\lesson_5\App\Services\Authentication.php(65): App\Models\User::findByLogin('tata')
-#3 C:\xampp\htdocs\php_course\php2\lesson_5\App\Controllers\Controller.php(21): App\Services\Authentication::getCurrentUser()
-#4 C:\xampp\htdocs\php_course\php2\lesson_5\App\Router.php(35): App\Controllers\Controller->__construct()
-#5 C:\xampp\htdocs\php_course\php2\lesson_5\index.php(25): App\Router::get()
-#6 {main}
-2024.08.22 00:33   C:\xampp\htdocs\php_course\php2\lesson_5\App\Db.php   Line: 30
+2024.08.22 19:18   C:\xampp\htdocs\php_course\php2\lesson_5\App\Controllers\Controller.php   Line: 34   
+2024.08.22 20:31   C:\xampp\htdocs\php_course\php2\lesson_5\App\Model.php   Line: 100   

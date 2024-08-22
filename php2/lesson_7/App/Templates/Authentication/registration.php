@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Lesson 7 </title>
+    <title> Lesson 5 </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -35,9 +35,11 @@
 
                 <label for="confirm_password"> Подтвердите пароль: </label>
                 <input class="form-control" id="confirm_password" name="confirm_password" type="password">
-                <?php if (!empty($errorCommon)) { ?>
-                    <p class="text-danger py-0 my-0"> <?php echo $errorCommon->getMessage(); ?> </p>
-                <?php } ?>
+                <?php if (!empty($errors['confirm_password'])) {
+                    foreach ($errors['confirm_password'] as $error) { ?>
+                        <p class="text-danger py-0 my-0"> <?php echo $error->getMessage(); ?> </p>
+                    <?php }
+                } ?>
             </div>
 
             <button type="submit" class="btn btn-primary"> Подтвердить</button>

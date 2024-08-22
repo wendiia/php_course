@@ -5,6 +5,7 @@ namespace App;
 use App\Exceptions\DbException;
 use App\Exceptions\Errors;
 use App\Exceptions\Http404Exception;
+use App\Exceptions\ModelException;
 use Exception;
 
 abstract class Model
@@ -42,10 +43,7 @@ abstract class Model
 
         if (method_exists($this, $nameValidateMethod)) {
             $this->$nameValidateMethod($value);
-
-            if (!str_contains($key, 'confirm')) {
-                $this->$key = $value;
-            }
+            $this->$key = $value;
         } else {
             throw new Exception('Такого свойства у модели не существует!');
         }
@@ -53,19 +51,25 @@ abstract class Model
 
     /**
      * @throws Errors
+     * @throws ModelException
      */
     public function fill(array $data): void
     {
-        $multiExceptions = new Errors();
+        $multiExceptions = new ModelException();
 
         foreach ($data as $key => $value) {
             try {
-                $this->setProperty($key, $value);
+                if (str_contains($key, 'confirm')) {
+                    $valueConfirm = explode('_', $key)[1];
+                    $nameValidateMethod = 'validate' . str_replace('_', '', $key);
+                    $this->$nameValidateMethod($data[$valueConfirm], $value);
+                } else {
+                    $this->setProperty($key, $value);
+                }
             } catch (Exception $e) {
-                $multiExceptions->addError($e, $key);
+                $multiExceptions->addError($key, $e->getErrors());
             }
         }
-
         if (!empty($multiExceptions->getErrors())) {
             throw $multiExceptions;
         }

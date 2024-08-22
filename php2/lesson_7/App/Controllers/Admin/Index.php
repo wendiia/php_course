@@ -5,17 +5,15 @@ namespace App\Controllers\Admin;
 use App\Controllers\AdminController;
 use App\Exceptions\DbException;
 use App\Exceptions\Http404Exception;
-use App\Exceptions\ItemNotFoundException;
-use App\Exceptions\ModelException;
 use App\Models\Article;
 use App\Models\Author;
 use App\Services\AdminDataTable;
+use Exception;
 
 class Index extends AdminController
 {
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
      */
     protected function actionAll(): void
     {
@@ -53,46 +51,32 @@ class Index extends AdminController
      */
     public function actionEdit(): void
     {
-        try {
-            $this->view->authors = Author::findAll();
-            $this->view->article = Article::findById($_GET['id']);
-            $this->view->display(__DIR__ . '/../../Templates/News/Admin/edit.php');
-        } catch (ItemNotFoundException $e) {
-            throw new Http404Exception($e);
-        }
+        $this->view->authors = Author::findAll();
+        $this->view->article = Article::findById($_GET['id']);
+        $this->view->display(__DIR__ . '/../../Templates/News/Admin/edit.php');
     }
 
     /**
      * @throws DbException
-     * @throws ItemNotFoundException
      * @throws Http404Exception
      */
     public function actionDelete(): void
     {
-        try {
-            $article = Article::findById($_GET['id']);
-            $article->delete();
-            header('Location: /admin');
-        } catch (ItemNotFoundException $e) {
-            throw new Http404Exception($e);
-        }
+        $article = Article::findById($_GET['id']);
+        $article->delete();
+        header('Location: /admin');
     }
 
     /**
      * @throws DbException
-     * @throws Http404Exception
      */
     public function actionSave(): void
     {
         $action = 'actionCreate';
 
         if (!empty($_GET['id'])) {
-            try {
-                $article = Article::findById($_GET['id']);
-                $action = 'actionEdit';
-            } catch (ItemNotFoundException $e) {
-                throw new Http404Exception($e);
-            }
+            $article = Article::findById($_GET['id']);
+            $action = 'actionEdit';
         } else {
             $article = new Article();
         }
@@ -107,7 +91,7 @@ class Index extends AdminController
             );
             $article->save();
             header('Location: /admin');
-        } catch (ModelException $exception) {
+        } catch (Exception $exception) {
             $this->view->article = $article;
             $this->view->errors = $exception->getErrors();
             $this->$action();
